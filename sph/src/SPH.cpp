@@ -15,30 +15,30 @@
 #include <cmath>
 #include <iostream>
 
-static const double PI = 3.14159265359;
+static const float PI = 3.14159265359f;
 
 namespace SPHSDK
 {
 
 namespace
 {
-inline SPHAlgorithms::Point3D SpericalToCartesian(double r, double fi, double teta)
+inline SPHAlgorithms::Point3F SpericalToCartesian(float r, float fi, float teta)
 {
-    return SPHAlgorithms::Point3D(r * sin(teta) * cos(fi) + 1.5, r * sin(teta) * sin(fi) + 1.5, r * cos(teta) + 2.);
+    return SPHAlgorithms::Point3F(r * sin(teta) * cos(fi) + 1.5f, r * sin(teta) * sin(fi) + 1.5f, r * cos(teta) + 2.f);
 }
 } // namespace
 
 SPH::SPH(const std::function<float(float, float, float)>* obstacle)
     : particles(Config::ParticlesNumber)
     , m_volume(SPHAlgorithms::Volume(
-          SPHAlgorithms::Cuboid(SPHAlgorithms::Point3D(), Config::CubeSize, Config::CubeSize, Config::CubeSize)))
+          SPHAlgorithms::Cuboid(SPHAlgorithms::Point3F(), Config::CubeSize, Config::CubeSize, Config::CubeSize)))
     , m_searcher(SPHAlgorithms::NeighboursSearch3D<ParticleVect>(m_volume, Config::WaterSupportRadius, 0.001))
     , m_obstacle(obstacle)
 {
     // set initial particle data
-    double r = 2 * Config::ParticleRadius;
-    double fi = 0.;
-    double teta = 0.;
+    float r = 2 * Config::ParticleRadius;
+    float fi = 0.f;
+    float teta = 0.f;
 
     size_t M = 5;
     size_t N = 5;
@@ -80,7 +80,7 @@ void SPH::run()
     m_searcher.search(particles);
 
     Forces::ComputeAllForces(particles);
-    Integrator::integrate(0.01, particles);
+    Integrator::integrate(0.01f, particles);
 
     Collision::detectCollisions(particles, m_volume, m_obstacle);
 }

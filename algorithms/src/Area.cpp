@@ -15,7 +15,7 @@ Area::Area() : m_boundingRect(Rect())
 {
 }
 
-double Area::areaFunction(double /*x*/, double /*y*/)
+float Area::areaFunction(float /*x*/, float /*y*/)
 {
   return 0.;
 }
@@ -29,7 +29,7 @@ Rect Area::getBoundingRect() const
     return m_boundingRect;
 }
 
-bool Area::isInsideArea(const Point2D& /*point*/)
+bool Area::isInsideArea(const Point2F& /*point*/)
 {
     return false;
 }

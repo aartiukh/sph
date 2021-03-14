@@ -15,7 +15,7 @@ namespace SPHSDK
 class Integrator
 {
 public:
-    static void integrate(double timeStep, ParticleVect& particles);
+    static void integrate(float timeStep, ParticleVect& particles);
 };
 
 } //SPHSDK

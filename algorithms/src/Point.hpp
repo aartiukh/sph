@@ -62,7 +62,7 @@ template <typename _Tp> static inline bool operator!=(const Point2<_Tp>& a, cons
     return a.x != b.x || a.y != b.y;
 }
 
-template <typename _Tp> static inline Point2<_Tp> operator*=(Point2<_Tp>& a, const double b)
+template <typename _Tp> static inline Point2<_Tp> operator*=(Point2<_Tp>& a, const float b)
 {
     a.x *= b;
     a.y *= b;
@@ -91,12 +91,12 @@ template <typename _Tp> static inline Point2<_Tp> operator-(const Point2<_Tp>& a
     return Point2<_Tp>(static_cast<_Tp>(-a.x), static_cast<_Tp>(-a.y));
 }
 
-template <typename _Tp> static inline Point2<_Tp> operator/(const Point2<_Tp>& a, const double b)
+template <typename _Tp> static inline Point2<_Tp> operator/(const Point2<_Tp>& a, const float b)
 {
     return Point2<_Tp>(static_cast<_Tp>(a.x / b), static_cast<_Tp>(a.y / b));
 }
 
-template <typename _Tp> static inline Point2<_Tp> operator*(const Point2<_Tp>& a, const double b)
+template <typename _Tp> static inline Point2<_Tp> operator*(const Point2<_Tp>& a, const float b)
 {
     return Point2<_Tp>(static_cast<_Tp>(a.x * b), static_cast<_Tp>(a.y * b));
 }
@@ -134,7 +134,7 @@ template <typename _Tp> inline auto Point3<_Tp>::calcNormSqr() const
 
 template <typename _Tp> inline auto Point3<_Tp>::calcNorm() const
 {
-    return std::sqrt(calcNormSqr());
+    return std::sqrtf(calcNormSqr());
 }
 
 template <typename _Tp> inline Point3<_Tp>& Point3<_Tp>::operator=(const Point3& pt)
@@ -156,7 +156,7 @@ template <typename _Tp> inline bool operator!=(const Point3<_Tp>& a, const Point
     return a.x != b.x || a.y != b.y || a.z != b.z;
 }
 
-template <typename _Tp> inline Point3<_Tp> operator*=(Point3<_Tp>& a, const double b)
+template <typename _Tp> inline Point3<_Tp> operator*=(Point3<_Tp>& a, const float b)
 {
     a.x *= b;
     a.y *= b;
@@ -189,22 +189,22 @@ template <typename _Tp> inline Point3<_Tp> operator-(const Point3<_Tp>& a)
     return Point3<_Tp>(-a.x, -a.y, -a.z);
 }
 
-template <typename _Tp> inline Point3<_Tp> operator/(const Point3<_Tp> a, const double b)
+template <typename _Tp> inline Point3<_Tp> operator/(const Point3<_Tp> a, const float b)
 {
     return Point3<_Tp>(a.x / b, a.y / b, a.z / b);
 }
 
-template <typename _Tp> inline Point3<_Tp> operator/(const double b, const Point3<_Tp> a)
+template <typename _Tp> inline Point3<_Tp> operator/(const float b, const Point3<_Tp> a)
 {
     return Point3<_Tp>(b / a.x, b / a.y, b / a.z);
 }
 
-template <typename _Tp> inline Point3<_Tp> operator*(const Point3<_Tp>& a, const double b)
+template <typename _Tp> inline Point3<_Tp> operator*(const Point3<_Tp>& a, const float b)
 {
     return Point3<_Tp>(a.x * b, a.y * b, a.z * b);
 }
 
-template <typename _Tp> inline Point3<_Tp> operator*(const double b, const Point3<_Tp>& a)
+template <typename _Tp> inline Point3<_Tp> operator*(const float b, const Point3<_Tp>& a)
 {
     return Point3<_Tp>(b * a.x, b * a.y, b * a.z);
 }

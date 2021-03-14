@@ -10,24 +10,24 @@ namespace SPHSDK
 struct Config
 {
     static const size_t ParticlesNumber;
-    static const double ParticleRadius;
+    static const float ParticleRadius;
 
-    static const double WaterDensity;
-    static const double WaterStiffness;
-    static const double WaterViscosity;
-    static const double WaterThreshold;
-    static const double WaterParticleMass;
-    static const double WaterSupportRadius;
-    static const double WaterSurfaceTension;
+    static const float WaterDensity;
+    static const float WaterStiffness;
+    static const float WaterViscosity;
+    static const float WaterThreshold;
+    static const float WaterParticleMass;
+    static const float WaterSupportRadius;
+    static const float WaterSurfaceTension;
 
-    static const SPHAlgorithms::Point3D InitialGravitationalAcceleration;
-    static SPHAlgorithms::Point3D GravitationalAcceleration;
-    static const SPHAlgorithms::Point3D InitialVelocity;
-    static const double CollisionVelocityMultiplier;
+    static const SPHAlgorithms::Point3F InitialGravitationalAcceleration;
+    static SPHAlgorithms::Point3F GravitationalAcceleration;
+    static const SPHAlgorithms::Point3F InitialVelocity;
+    static const float CollisionVelocityMultiplier;
 
-    static const double SpeedTreshold;
+    static const float SpeedTreshold;
 
-    static const double CubeSize;
+    static const float CubeSize;
 
 }; //Config
 } //SPHSDK

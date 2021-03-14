@@ -15,21 +15,21 @@ namespace SPHAlgorithms
 // TODO move to common and to separate class
 struct Rect
 {
-    Point2D leftTop;
+    Point2F leftTop;
 
-    Point2D rightBottom;
+    Point2F rightBottom;
 
     Rect() :
-        leftTop(Point2D()),
-        rightBottom(Point2D()) {}
+        leftTop(Point2F()),
+        rightBottom(Point2F()) {}
 
-    Rect(const Point2D& leftTop_, const Point2D& rightBotom_) :
+    Rect(const Point2F& leftTop_, const Point2F& rightBotom_) :
         leftTop(leftTop_),
         rightBottom(rightBotom_) {}
 
-    double getWidth() const { return rightBottom.x - leftTop.x; }
+    float getWidth() const { return rightBottom.x - leftTop.x; }
 
-    double getHeight() const { return rightBottom.y - leftTop.y; }
+    float getHeight() const { return rightBottom.y - leftTop.y; }
 };
 
 /**
@@ -37,16 +37,16 @@ struct Rect
 */
 struct Cuboid
 {
-    Point3D startingPoint;
-    double width, length, height; // x, y, z axis
+    Point3F startingPoint;
+    float width, length, height; // x, y, z axis
 
     Cuboid() :
-        startingPoint(Point3D()),
+        startingPoint(Point3F()),
         width(0.),
         length(0.),
         height(0.) {}
 
-    Cuboid(const Point3D& _startingPoint, const double _width, const double _length, const double _height) :
+    Cuboid(const Point3F& _startingPoint, const float _width, const float _length, const float _height) :
         startingPoint(_startingPoint),
         width(_width),
         length(_length),
@@ -66,11 +66,11 @@ public:
 
     ~Area() = default;
 
-    double areaFunction(double x, double y);
+    float areaFunction(float x, float y);
 
     Rect getBoundingRect() const;
 
-    bool isInsideArea(const Point2D& point);
+    bool isInsideArea(const Point2F& point);
 
 private:
 

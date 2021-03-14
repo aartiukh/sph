@@ -17,17 +17,17 @@ namespace TestEnvironment
 
 void ParticleTestSuite::particleIsValid()
 {
-    Particle particle(SPHAlgorithms::Point3D(5.0, -6.0, 1.0), 0.1);
+    Particle particle(SPHAlgorithms::Point3F(5.f, -6.f, 1.f), 0.1f);
 
-    EXPECT_DOUBLE_EQ(5.0, particle.position.x);
-    EXPECT_DOUBLE_EQ(-6.0, particle.position.y);
-    EXPECT_DOUBLE_EQ(1.0, particle.position.z);
-    EXPECT_DOUBLE_EQ(0.1, particle.radius);
-    EXPECT_DOUBLE_EQ(0.0, particle.velocity.x);
-    EXPECT_DOUBLE_EQ(0.0, particle.velocity.y);
-    EXPECT_DOUBLE_EQ(0.0, particle.velocity.z);
-    EXPECT_DOUBLE_EQ(0.0, particle.density);
-    EXPECT_DOUBLE_EQ(0.0, particle.pressure);
+    EXPECT_FLOAT_EQ(5.f, particle.position.x);
+    EXPECT_FLOAT_EQ(-6.f, particle.position.y);
+    EXPECT_FLOAT_EQ(1.f, particle.position.z);
+    EXPECT_FLOAT_EQ(0.1f, particle.radius);
+    EXPECT_FLOAT_EQ(0.f, particle.velocity.x);
+    EXPECT_FLOAT_EQ(0.f, particle.velocity.y);
+    EXPECT_FLOAT_EQ(0.f, particle.velocity.z);
+    EXPECT_FLOAT_EQ(0.f, particle.density);
+    EXPECT_FLOAT_EQ(0.f, particle.pressure);
 }
 
 } // namespace TestEnvironment

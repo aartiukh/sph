@@ -118,18 +118,18 @@ private:
 
     struct TestPoint
     {
-        TestPoint(SPHAlgorithms::Point2D _position) : position(_position) {}
+        TestPoint(SPHAlgorithms::Point2F _position) : position(_position) {}
 
-        SPHAlgorithms::Point2D position;
+        SPHAlgorithms::Point2F position;
 
         SPHAlgorithms::SizetVector neighbours;
     };
 
     struct TestPoint3D
     {
-        TestPoint3D(SPHAlgorithms::Point3D _position) : position(_position) {}
+        TestPoint3D(SPHAlgorithms::Point3F _position) : position(_position) {}
 
-        SPHAlgorithms::Point3D position;
+        SPHAlgorithms::Point3F position;
 
         SPHAlgorithms::SizetVector neighbours;
     };
@@ -138,33 +138,33 @@ private:
     using TestPoints3D = std::vector<TestPoint3D>;
 
     static void testSearch(/*in*/ const Rect& areaRect,
-                           /*in*/ double radius,
-                           /*in*/ double accuracy,
+                           /*in*/ float radius,
+                           /*in*/ float accuracy,
                            /*in*/ TestPoints &points,
                            /*in*/ const SizetVector& expectedBoxSizes,
                            /*in*/ const VectorOfSizetVectors& expectedNeighbours);
 
     static void testInsert(/*in*/ const Rect& areaRect,
-                           /*in*/ double radius,
-                           /*in*/ double accuracy,
+                           /*in*/ float radius,
+                           /*in*/ float accuracy,
                            /*in*/ TestPoints& points,
                            /*in*/ const SizetVector& expectedBoxSizes,
                            /*in*/ const VectorOfSizetVectors& expectedPointsInBoxes);
 
     static void testSearch3D(const SPHAlgorithms::Cuboid&               cuboid,
-                           double                      radius,
-                           double                      accuracy,
-                           TestPoints3D&               points,
-                           const SizetVector&          expectedBoxSizes,
-                           const VectorOfSizetVectors& expectedBoxNeighbours,
-                           const VectorOfSizetVectors& expectedPointNeighbours);
+                             float                      radius,
+                             float                      accuracy,
+                             TestPoints3D&               points,
+                             const SizetVector&          expectedBoxSizes,
+                             const VectorOfSizetVectors& expectedBoxNeighbours,
+                             const VectorOfSizetVectors& expectedPointNeighbours);
 
     static void testInsert3D(const SPHAlgorithms::Cuboid&               cuboid,
-                           double                      radius,
-                           double                      accuracy,
-                           TestPoints3D&               points,
-                           const SizetVector&          expectedBoxSizes,
-                           const VectorOfSizetVectors& expectedPointsInBoxes);
+                             float                      radius,
+                             float                      accuracy,
+                             TestPoints3D&               points,
+                             const SizetVector&          expectedBoxSizes,
+                             const VectorOfSizetVectors& expectedPointsInBoxes);
 
 };
 

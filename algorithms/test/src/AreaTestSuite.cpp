@@ -24,7 +24,7 @@ void AreaTestSuite::testAreaFunction()
 void AreaTestSuite::testIsInsideArea()
 {
   Area a;
-  Point2D p;
+  Point2F p;
 
   ASSERT_FALSE(a.isInsideArea(p));
 }

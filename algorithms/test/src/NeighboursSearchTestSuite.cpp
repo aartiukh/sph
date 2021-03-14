@@ -21,8 +21,8 @@ namespace TestEnvironment
 {
 
 void NeighboursSearchTestSuite::testSearch(const Rect&                 areaRect,
-                                           double                      radius,
-                                           double                      accuracy,
+                                           float                       radius,
+                                           float                       accuracy,
                                            TestPoints&                 points,
                                            const SizetVector&          expectedBoxSizes,
                                            const VectorOfSizetVectors& expectedNeighbours)
@@ -49,8 +49,8 @@ void NeighboursSearchTestSuite::testSearch(const Rect&                 areaRect,
 }
 
 void NeighboursSearchTestSuite::testInsert(const Rect&                 areaRect,
-                                           double                      radius,
-                                           double                      accuracy,
+                                           float                       radius,
+                                           float                       accuracy,
                                            TestPoints&                 points,
                                            const SizetVector&          expectedBoxSizes,
                                            const VectorOfSizetVectors& expectedPointsInBoxes)
@@ -82,13 +82,13 @@ void NeighboursSearchTestSuite::testInsert(const Rect&                 areaRect,
 
 //----------------------------------
 
-void NeighboursSearchTestSuite::testSearch3D(const Cuboid&             cuboid,
-                                           double                      radius,
-                                           double                      accuracy,
-                                           TestPoints3D&               points,
-                                           const SizetVector&          expectedBoxSizes,
-                                           const VectorOfSizetVectors& expectedBoxNeighbours,
-                                           const VectorOfSizetVectors& expectedPointNeighbours)
+void NeighboursSearchTestSuite::testSearch3D(const Cuboid&              cuboid,
+                                            float                       radius,
+                                            float                       accuracy,
+                                            TestPoints3D&               points,
+                                            const SizetVector&          expectedBoxSizes,
+                                            const VectorOfSizetVectors& expectedBoxNeighbours,
+                                            const VectorOfSizetVectors& expectedPointNeighbours)
 {
     ASSERT_EQ(points.size(), expectedPointNeighbours.size());
 
@@ -114,8 +114,8 @@ void NeighboursSearchTestSuite::testSearch3D(const Cuboid&             cuboid,
 }
 
 void NeighboursSearchTestSuite::testInsert3D(const Cuboid&               cuboid,
-                                             double                      radius,
-                                             double                      accuracy,
+                                             float                      radius,
+                                             float                      accuracy,
                                              TestPoints3D&               points,
                                              const SizetVector&          expectedBoxSizes,
                                              const VectorOfSizetVectors& expectedPointsInBoxes)
@@ -145,11 +145,11 @@ void NeighboursSearchTestSuite::testInsert3D(const Cuboid&               cuboid,
 
 void NeighboursSearchTestSuite::searchInOneBox()
 {
-    TestPoints points = {Point2D(0.5, 0.5), Point2D(0.6, 0.6), Point2D(0.7, 0.7)};
+    TestPoints points = {Point2F(0.5f, 0.5f), Point2F(0.6f, 0.6f), Point2F(0.7f, 0.7f)};
 
-    testSearch(Rect(Point2D(0., 0.), Point2D(1.0, 1.0)), // areaRect
-               0.5,                                      // radius
-               0.001,                                    // accuracy
+    testSearch(Rect(Point2F(0.f, 0.f), Point2F(1.f, 1.f)), // areaRect
+               0.5f,                                     // radius
+               0.001f,                                   // accuracy
                points,                                   // points
                {0, 0, 0, 3},                             // expectedBoxSizes
                {{1, 2}, {0, 2}, {0, 1}});                // expectedNeighbours
@@ -157,11 +157,11 @@ void NeighboursSearchTestSuite::searchInOneBox()
 
 void NeighboursSearchTestSuite::searchInDifferentBoxesRightBottom()
 {
-    TestPoints points = {Point2D(3.5, 0.5), Point2D(2.5, 0.5), Point2D(2.5, 1.5), Point2D(3.5, 1.5)};
+    TestPoints points = {Point2F(3.5f, 0.5f), Point2F(2.5f, 0.5f), Point2F(2.5f, 1.5f), Point2F(3.5f, 1.5f)};
 
-    testSearch(Rect(Point2D(0., 0.), Point2D(4.0, 4.0)),         // areaRect
-               1.0,                                              // radius
-               0.001,                                            // accuracy
+    testSearch(Rect(Point2F(0.f, 0.f), Point2F(4.f, 4.f)),       // areaRect
+               1.0f,                                             // radius
+               0.001f,                                           // accuracy
                points,                                           // points
                {0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0}, // expectedBoxSizes
                {{3, 1}, {2, 0}, {1, 3}, {0, 2}});                // expectedNeighbours
@@ -169,11 +169,11 @@ void NeighboursSearchTestSuite::searchInDifferentBoxesRightBottom()
 
 void NeighboursSearchTestSuite::searchInDifferentBoxesLeftBottom()
 {
-    TestPoints points = {Point2D(0.5, 0.5), Point2D(1.5, 0.5), Point2D(0.5, 1.5), Point2D(1.5, 1.5)};
+    TestPoints points = {Point2F(0.5f, 0.5f), Point2F(1.5f, 0.5f), Point2F(0.5f, 1.5f), Point2F(1.5f, 1.5f)};
 
-    testSearch(Rect(Point2D(0., 0.), Point2D(4.0, 4.0)),         // areaRect
-               1.0,                                              // radius
-               0.001,                                            // accuracy
+    testSearch(Rect(Point2F(0.f, 0.f), Point2F(4.f, 4.f)),       // areaRect
+               1.f,                                              // radius
+               0.001f,                                           // accuracy
                points,                                           // points
                {1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // expectedBoxSizes
                {{2, 1}, {3, 0}, {0, 3}, {1, 2}});                // expectedNeighbours
@@ -181,11 +181,11 @@ void NeighboursSearchTestSuite::searchInDifferentBoxesLeftBottom()
 
 void NeighboursSearchTestSuite::searchInDifferentBoxesRightTop()
 {
-    TestPoints points = {Point2D(3.5, 3.5), Point2D(2.5, 3.5), Point2D(2.5, 2.5), Point2D(3.5, 2.5)};
+    TestPoints points = {Point2F(3.5f, 3.5f), Point2F(2.5f, 3.5f), Point2F(2.5f, 2.5f), Point2F(3.5f, 2.5f)};
 
-    testSearch(Rect(Point2D(0., 0.), Point2D(4.0, 4.0)),         // areaRect
-               1.0,                                              // radius
-               0.001,                                            // accuracy
+    testSearch(Rect(Point2F(0.f, 0.f), Point2F(4.f, 4.f)),       // areaRect
+               1.f,                                              // radius
+               0.001f,                                           // accuracy
                points,                                           // points
                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1}, // expectedBoxSizes
                {{3, 1}, {2, 0}, {1, 3}, {0, 2}});                // expectedNeighbours
@@ -193,11 +193,11 @@ void NeighboursSearchTestSuite::searchInDifferentBoxesRightTop()
 
 void NeighboursSearchTestSuite::searchInDifferentBoxesLeftTop()
 {
-    TestPoints points = {Point2D(0.5, 3.5), Point2D(1.5, 3.5), Point2D(0.5, 2.5), Point2D(1.5, 2.5)};
+    TestPoints points = {Point2F(0.5, 3.5f), Point2F(1.5, 3.5f), Point2F(0.5, 2.5f), Point2F(1.5, 2.5f)};
 
-    testSearch(Rect(Point2D(0., 0.), Point2D(4.0, 4.0)),         // areaRect
-               1.0,                                              // radius
-               0.001,                                            // accuracy
+    testSearch(Rect(Point2F(0.f, 0.f), Point2F(4.f, 4.f)),       // areaRect
+               1.f,                                              // radius
+               0.001f,                                           // accuracy
                points,                                           // points
                {0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0}, // expectedBoxSizes
                {{2, 1}, {3, 0}, {0, 3}, {1, 2}});                // expectedNeighbours
@@ -205,12 +205,12 @@ void NeighboursSearchTestSuite::searchInDifferentBoxesLeftTop()
 
 void NeighboursSearchTestSuite::searchInDifferentBoxesRightSide()
 {
-    TestPoints points = {Point2D(3.5, 2.5), Point2D(3.5, 3.5), Point2D(2.5, 3.5),
-                         Point2D(2.5, 2.5), Point2D(2.5, 1.5), Point2D(3.5, 1.5)};
+    TestPoints points = {Point2F(3.5f, 2.5f), Point2F(3.5f, 3.5f), Point2F(2.5f, 3.5f),
+                         Point2F(2.5f, 2.5f), Point2F(2.5f, 1.5f), Point2F(3.5f, 1.5f)};
 
-    testSearch(Rect(Point2D(0., 0.), Point2D(4.0, 4.0)),                // areaRect
-               1.0,                                                     // radius
-               0.001,                                                   // accuracy
+    testSearch(Rect(Point2F(0.f, 0.f), Point2F(4.f, 4.f)),              // areaRect
+               1.f,                                                     // radius
+               0.001f,                                                  // accuracy
                points,                                                  // points
                {0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1},        // expectedBoxSizes
                {{5, 1, 3}, {0, 2}, {3, 1}, {4, 2, 0}, {3, 5}, {0, 4}}); // expectedNeighbours
@@ -218,12 +218,12 @@ void NeighboursSearchTestSuite::searchInDifferentBoxesRightSide()
 
 void NeighboursSearchTestSuite::searchInDifferentBoxesLeftSide()
 {
-    TestPoints points = {Point2D(0.5, 2.5), Point2D(0.5, 3.5), Point2D(1.5, 3.5),
-                         Point2D(1.5, 2.5), Point2D(1.5, 1.5), Point2D(0.5, 1.5)};
+    TestPoints points = {Point2F(0.5f, 2.5f), Point2F(0.5f, 3.5f), Point2F(1.5f, 3.5f),
+                         Point2F(1.5f, 2.5f), Point2F(1.5f, 1.5f), Point2F(0.5f, 1.5f)};
 
-    testSearch(Rect(Point2D(0., 0.), Point2D(4.0, 4.0)),                // areaRect
-               1.0,                                                     // radius
-               0.001,                                                   // accuracy
+    testSearch(Rect(Point2F(0.f, 0.f), Point2F(4.f, 4.f)),              // areaRect
+               1.f,                                                     // radius
+               0.001f,                                                  // accuracy
                points,                                                  // points
                {0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0},        // expectedBoxSizes
                {{5, 1, 3}, {0, 2}, {3, 1}, {4, 2, 0}, {3, 5}, {0, 4}}); // expectedNeighbours
@@ -231,12 +231,12 @@ void NeighboursSearchTestSuite::searchInDifferentBoxesLeftSide()
 
 void NeighboursSearchTestSuite::searchInDifferentBoxesCenterBottom()
 {
-    TestPoints points = {Point2D(1.5, 0.5), Point2D(0.5, 0.5), Point2D(0.5, 1.5),
-                         Point2D(1.5, 1.5), Point2D(2.5, 1.5), Point2D(2.5, 0.5)};
+    TestPoints points = {Point2F(1.5f, 0.5f), Point2F(0.5f, 0.5f), Point2F(0.5f, 1.5f),
+                         Point2F(1.5f, 1.5f), Point2F(2.5f, 1.5f), Point2F(2.5f, 0.5f)};
 
-    testSearch(Rect(Point2D(0., 0.), Point2D(4.0, 4.0)),                // areaRect
-               1.0,                                                     // radius
-               0.001,                                                   // accuracy
+    testSearch(Rect(Point2F(0.f, 0.f), Point2F(4.f, 4.f)),              // areaRect
+               1.f,                                                     // radius
+               0.001f,                                                  // accuracy
                points,                                                  // points
                {1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},        // expectedBoxSizes
                {{3, 1, 5}, {2, 0}, {1, 3}, {0, 2, 4}, {5, 3}, {4, 0}}); // expectedNeighbours
@@ -244,12 +244,12 @@ void NeighboursSearchTestSuite::searchInDifferentBoxesCenterBottom()
 
 void NeighboursSearchTestSuite::searchInDifferentBoxesCenterTop()
 {
-    TestPoints points = {Point2D(1.5, 3.5), Point2D(0.5, 3.5), Point2D(0.5, 2.5),
-                         Point2D(1.5, 2.5), Point2D(2.5, 2.5), Point2D(2.5, 3.5)};
+    TestPoints points = {Point2F(1.5f, 3.5f), Point2F(0.5f, 3.5f), Point2F(0.5f, 2.5f),
+                         Point2F(1.5f, 2.5f), Point2F(2.5f, 2.5f), Point2F(2.5f, 3.5f)};
 
-    testSearch(Rect(Point2D(0., 0.), Point2D(4.0, 4.0)),                // areaRect
-               1.0,                                                     // radius
-               0.001,                                                   // accuracy
+    testSearch(Rect(Point2F(0.f, 0.f), Point2F(4.f, 4.f)),              // areaRect
+               1.f,                                                     // radius
+               0.001f,                                                  // accuracy
                points,                                                  // points
                {0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0},        // expectedBoxSizes
                {{3, 1, 5}, {2, 0}, {1, 3}, {0, 2, 4}, {5, 3}, {4, 0}}); // expectedNeighbours
@@ -257,24 +257,24 @@ void NeighboursSearchTestSuite::searchInDifferentBoxesCenterTop()
 
 void NeighboursSearchTestSuite::searchInCornerOfBoxesCenter()
 {
-    TestPoints points = {Point2D(1.0, 1.0), Point2D(1.0, 2.0), Point2D(1.0, 0.0), Point2D(0.0, 1.0), Point2D(2.0, 1.0)};
+    TestPoints points = {Point2F(1.f, 1.f), Point2F(1.f, 2.f), Point2F(1.f, 0.f), Point2F(0.f, 1.f), Point2F(2.f, 1.f)};
 
-    testSearch(Rect(Point2D(0., 0.), Point2D(2.0, 2.0)), // areaRect
-               1.0,                                      // radius
-               0.001,                                    // accuracy
-               points,                                   // points
-               {0, 1, 1, 3},                             // expectedBoxSizes
-               {{1, 4, 2, 3}, {0}, {0}, {0}, {0}});      // expectedNeighbours
+    testSearch(Rect(Point2F(0.f, 0.f), Point2F(2.f, 2.f)), // areaRect
+               1.f,                                        // radius
+               0.001f,                                     // accuracy
+               points,                                     // points
+               {0, 1, 1, 3},                               // expectedBoxSizes
+               {{1, 4, 2, 3}, {0}, {0}, {0}, {0}});        // expectedNeighbours
 }
 
 void NeighboursSearchTestSuite::searchInCornerOfBoxesCorners()
 {
-    TestPoints points = {Point2D(0., 0.), Point2D(0., 1.), Point2D(0., 2.), Point2D(1., 2.),
-                         Point2D(2., 2.), Point2D(2., 1.), Point2D(2., 0.), Point2D(1., 0.)};
+    TestPoints points = {Point2F(0.f, 0.f), Point2F(0.f, 1.f), Point2F(0.f, 2.f), Point2F(1.f, 2.f),
+                         Point2F(2.f, 2.f), Point2F(2.f, 1.f), Point2F(2.f, 0.f), Point2F(1.f, 0.f)};
 
-    testSearch(Rect(Point2D(0., 0.), Point2D(2.0, 2.0)),                          // areaRect
-               1.0,                                                               // radius
-               0.001,                                                             // accuracy
+    testSearch(Rect(Point2F(0.f, 0.f), Point2F(2.f, 2.f)),                        // areaRect
+               1.f,                                                               // radius
+               0.001f,                                                            // accuracy
                points,                                                            // points
                {1, 2, 2, 3},                                                      // expectedBoxSizes
                {{1, 7}, {2, 0}, {1, 3}, {4, 2}, {3, 5}, {4, 6}, {7, 5}, {6, 0}}); // expectedNeighbours
@@ -284,14 +284,14 @@ void NeighboursSearchTestSuite::searchInCornerOfBoxesCorners()
 
 void NeighboursSearchTestSuite::searchInOneBox3D()
 {
-    TestPoints3D points = { Point3D(0.5, 0.5, 0.5),
-                            Point3D(0.6, 0.6, 0.6),
-                            Point3D(0.7, 0.7, 0.7) };
+    TestPoints3D points = { Point3F(0.5f, 0.5f, 0.5f),
+                            Point3F(0.6f, 0.6f, 0.6f),
+                            Point3F(0.7f, 0.7f, 0.7f) };
 
-    testSearch3D(Cuboid(Point3D(0., 0., 0.), 1.0, 1.0, 1.0),  // areaRect
-                 0.5,                                         // radius
-                 0.001,                                       // accuracy
-                 points,                                      // points
+    testSearch3D(Cuboid(Point3F(0.f, 0.f, 0.f), 1.f, 1.f, 1.f),  // areaRect
+                 0.5f,                                           // radius
+                 0.001f,                                         // accuracy
+                 points,                                         // points
                  { 0, 0, 0, 0,
                    0, 0, 0, 3
                  },                     // expectedBoxSizes
@@ -312,16 +312,16 @@ void NeighboursSearchTestSuite::searchInOneBox3D()
 
 void NeighboursSearchTestSuite::searchInDifferentBoxesCenterBack3D()
 {
-    TestPoints3D points = { Point3D(0.75, 0.25, 0.75),   // 10
-                            Point3D(0.45, 0.25, 0.75),   // 9
-                            Point3D(0.75, 0.25, 0.45),   // 1
-                            Point3D(1.05, 0.25, 0.75),   // 11
-                            Point3D(0.75, 0.25, 1.05),   // 19
-                            Point3D(0.75, 0.75, 0.75) }; // 13
+    TestPoints3D points = { Point3F(0.75f, 0.25f, 0.75f),   // 10
+                            Point3F(0.45f, 0.25f, 0.75f),   // 9
+                            Point3F(0.75f, 0.25f, 0.45f),   // 1
+                            Point3F(1.05f, 0.25f, 0.75f),   // 11
+                            Point3F(0.75f, 0.25f, 1.05f),   // 19
+                            Point3F(0.75f, 0.75f, 0.75f) }; // 13
 
-    testSearch3D(Cuboid(Point3D(0., 0., 0.), 1.5, 1.5, 1.5),  // areaRect
-                 0.5,                                         // radius
-                 0.001,                                       // accuracy
+    testSearch3D(Cuboid(Point3F(0.f, 0.f, 0.f), 1.5, 1.5, 1.5f),  // areaRect
+                 0.5f,                                         // radius
+                 0.001f,                                       // accuracy
                  points,                                      // points
                  { 0, 1, 0, 0, 0, 0, 0, 0, 0,
                    1, 1, 1, 0, 1, 0, 0, 0, 0,
@@ -366,18 +366,18 @@ void NeighboursSearchTestSuite::searchInDifferentBoxesCenterBack3D()
 
 void NeighboursSearchTestSuite::searchInDifferentBoxesCenterMiddle3D()
 {
-    TestPoints3D points = { Point3D(0.15, 0.35, 0.15),   // 33
-                            Point3D(0.2, 0.35, 0.15),    // 34
-                            Point3D(0.09, 0.35, 0.15),   // 32
-                            Point3D(0.15, 0.35, 0.2),    // 53
-                            Point3D(0.15, 0.35, 0.09),   // 13
-                            Point3D(0.2, 0.29, 0.2),     // 50
-                            Point3D(0.09, 0.29, 0.09),   // 8
-                            Point3D(0.09, 0.41, 0.2),    // 56
-                            Point3D(0.2, 0.41, 0.09) };  // 18
-    testSearch3D(Cuboid(Point3D(0., 0., 0.), 0.4, 0.5, 0.3001),  // areaRect
-                 0.1,                                         // radius
-                 0.001,                                       // accuracy
+    TestPoints3D points = { Point3F(0.15f, 0.35f, 0.15f),   // 33
+                            Point3F(0.2f, 0.35f, 0.15f),    // 34
+                            Point3F(0.09f, 0.35f, 0.15f),   // 32
+                            Point3F(0.15f, 0.35f, 0.2f),    // 53
+                            Point3F(0.15f, 0.35f, 0.09f),   // 13
+                            Point3F(0.2f, 0.29f, 0.2f),     // 50
+                            Point3F(0.09f, 0.29f, 0.09f),   // 8
+                            Point3F(0.09f, 0.41f, 0.2f),    // 56
+                            Point3F(0.2f, 0.41f, 0.09f) };  // 18
+    testSearch3D(Cuboid(Point3F(0.f, 0.f, 0.f), 0.4f, 0.5f, 0.3001f),  // areaRect
+                 0.1f,                                         // radius
+                 0.001f,                                       // accuracy
                  points,                                      // points
                  { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0,
                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0,
@@ -460,12 +460,12 @@ void NeighboursSearchTestSuite::searchInDifferentBoxesCenterMiddle3D()
 
 void NeighboursSearchTestSuite::insertPointsIntoBoxesCornerPoints()
 {
-    TestPoints points = {Point2D(0.0, 0.0), Point2D(2.0, 0.0), Point2D(4.0, 0.0), Point2D(0.0, 2.0), Point2D(0.0, 4.0),
-                         Point2D(2.0, 2.0), Point2D(2.0, 4.0), Point2D(4.0, 2.0), Point2D(4.0, 4.0)};
+    TestPoints points = {Point2F(0.f, 0.f), Point2F(2.f, 0.f), Point2F(4.f, 0.f), Point2F(0.f, 2.f), Point2F(0.f, 4.f),
+                         Point2F(2.f, 2.f), Point2F(2.f, 4.f), Point2F(4.f, 2.f), Point2F(4.f, 4.f)};
 
-    testInsert(Rect(Point2D(0., 0.), Point2D(4.0, 4.0)), // areaRect
-               2.0,                                      // radius
-               0.001,                                    // accuracy
+    testInsert(Rect(Point2F(0.f, 0.f), Point2F(4.f, 4.f)), // areaRect
+               2.f,                                      // radius
+               0.001f,                                    // accuracy
                points,                                   // points
                {1, 2, 2, 4},                             // expectedBoxSizes
                {{0}, {1, 2}, {3, 4}, {5, 6, 7, 8}});     // expectedPointsInBoxes
@@ -473,12 +473,12 @@ void NeighboursSearchTestSuite::insertPointsIntoBoxesCornerPoints()
 
 void NeighboursSearchTestSuite::insertPointsIntoBoxesBorderPoints()
 {
-    TestPoints points = {Point2D(0.0, 1.0), Point2D(0.0, 3.0), Point2D(1.0, 4.0), Point2D(3.0, 4.0),
-                         Point2D(4.0, 3.0), Point2D(4.0, 1.0), Point2D(3.0, 0.0), Point2D(1.0, 0.0)};
+    TestPoints points = {Point2F(0.f, 1.f), Point2F(0.f, 3.f), Point2F(1.f, 4.f), Point2F(3.f, 4.f),
+                         Point2F(4.f, 3.f), Point2F(4.f, 1.f), Point2F(3.f, 0.f), Point2F(1., 0.f)};
 
-    testInsert(Rect(Point2D(0., 0.), Point2D(4.0, 4.0)), // areaRect
-               2.0,                                      // radius
-               0.001,                                    // accuracy
+    testInsert(Rect(Point2F(0.f, 0.f), Point2F(4.f, 4.f)), // areaRect
+               2.f,                                      // radius
+               0.001f,                                    // accuracy
                points,                                   // points
                {2, 2, 2, 2},                             // expectedBoxSizes
                {{0, 7}, {5, 6}, {1, 2}, {3, 4}});        // expectedPointsInBoxes
@@ -486,16 +486,16 @@ void NeighboursSearchTestSuite::insertPointsIntoBoxesBorderPoints()
 
 void NeighboursSearchTestSuite::insertPointsIntoBoxesInnerPoints()
 {
-    TestPoints points = {Point2D(0.5, 0.5), Point2D(1.0, 1.0), Point2D(1.5, 1.5), Point2D(2.5, 0.5), Point2D(3.0, 1.0),
-                         Point2D(3.5, 1.5), Point2D(4.5, 0.5), Point2D(5.0, 1.0), Point2D(5.5, 1.5), Point2D(0.5, 2.5),
-                         Point2D(1.0, 3.0), Point2D(1.5, 3.5), Point2D(2.5, 2.5), Point2D(3.0, 3.0), Point2D(3.5, 3.5),
-                         Point2D(4.5, 2.5), Point2D(5.0, 3.0), Point2D(5.5, 3.5), Point2D(0.5, 4.5), Point2D(1.0, 5.0),
-                         Point2D(1.5, 5.5), Point2D(2.5, 4.5), Point2D(3.0, 5.0), Point2D(3.5, 5.5), Point2D(4.5, 4.5),
-                         Point2D(5.0, 5.0), Point2D(5.5, 5.5)};
+    TestPoints points = {Point2F(0.5f, 0.5f), Point2F(1.f, 1.f), Point2F(1.5f, 1.5f), Point2F(2.5f, 0.5f), Point2F(3.f, 1.f),
+                         Point2F(3.5f, 1.5f), Point2F(4.5f, 0.5f), Point2F(5.f, 1.f), Point2F(5.5f, 1.5f), Point2F(0.5f, 2.5f),
+                         Point2F(1.f, 3.f), Point2F(1.5f, 3.5f), Point2F(2.5f, 2.5f), Point2F(3.f, 3.f), Point2F(3.5f, 3.5f),
+                         Point2F(4.5f, 2.5f), Point2F(5.f, 3.f), Point2F(5.5f, 3.5f), Point2F(0.5f, 4.5f), Point2F(1.f, 5.f),
+                         Point2F(1.5f, 5.5f), Point2F(2.5f, 4.5f), Point2F(3.f, 5.f), Point2F(3.5f, 5.5f), Point2F(4.5f, 4.5f),
+                         Point2F(5.f, 5.f), Point2F(5.5f, 5.5f)};
 
-    testInsert(Rect(Point2D(0., 0.), Point2D(6.0, 6.0)), // areaRect
-               2.0,                                      // radius
-               0.001,                                    // accuracy
+    testInsert(Rect(Point2F(0.f, 0.f), Point2F(6.f, 6.f)), // areaRect
+               2.f,                                      // radius
+               0.001f,                                    // accuracy
                points,                                   // points
                {3, 3, 3, 3, 3, 3, 3, 3, 3},              // expectedBoxSizes
                {{0, 1, 2},
@@ -511,17 +511,17 @@ void NeighboursSearchTestSuite::insertPointsIntoBoxesInnerPoints()
 
 void NeighboursSearchTestSuite::insertPointsIntoBoxesCenterBoxFrame()
 {
-    TestPoints points = {Point2D(2.0, 2.0), Point2D(2.5, 2.5),       Point2D(3.0, 3.0),      Point2D(3.5, 3.5),
-                         Point2D(4.0, 4.0), Point2D(2.0001, 2.0001), Point2D(2.0, 4.0),      Point2D(2.5, 3.5),
-                         Point2D(3.5, 2.5), Point2D(4.0, 2.0),       Point2D(2.5, 3.0),      Point2D(3.5, 3.0),
-                         Point2D(3.0, 3.5), Point2D(3.0, 2.5),       Point2D(2.5, 2.0),      Point2D(3.0, 2.0),
-                         Point2D(3.5, 2.0), Point2D(2.5, 4.0),       Point2D(3.0, 4.0),      Point2D(3.5, 4.0),
-                         Point2D(2.0, 2.5), Point2D(2.0, 3.0),       Point2D(2.0, 3.5),      Point2D(4.0, 2.5),
-                         Point2D(4.0, 3.0), Point2D(4.0, 3.5),       Point2D(3.9999, 3.9999)};
+    TestPoints points = {Point2F(2.f, 2.f), Point2F(2.5f, 2.5f),       Point2F(3.f, 3.f),      Point2F(3.5f, 3.5f),
+                         Point2F(4.f, 4.f), Point2F(2.0001f, 2.0001f), Point2F(2.f, 4.f),      Point2F(2.5f, 3.5f),
+                         Point2F(3.5f, 2.5f), Point2F(4.f, 2.f),       Point2F(2.5f, 3.f),      Point2F(3.5f, 3.f),
+                         Point2F(3.f, 3.5f), Point2F(3.f, 2.5f),       Point2F(2.5f, 2.f),      Point2F(3.f, 2.f),
+                         Point2F(3.5f, 2.f), Point2F(2.5f, 4.f),       Point2F(3.f, 4.f),      Point2F(3.5f, 4.f),
+                         Point2F(2.f, 2.5f), Point2F(2.f, 3.f),       Point2F(2.f, 3.5f),      Point2F(4.f, 2.5f),
+                         Point2F(4.f, 3.f), Point2F(4.f, 3.5f),       Point2F(3.9999f, 3.9999f)};
 
-    testInsert(Rect(Point2D(0., 0.), Point2D(6.0, 6.0)), // areaRect
-               2.0,                                      // radius
-               0.001,                                    // accuracy
+    testInsert(Rect(Point2F(0.f, 0.f), Point2F(6.f, 6.f)), // areaRect
+               2.f,                                      // radius
+               0.001f,                                    // accuracy
                points,                                   // points
                {0, 0, 0, 0, 18, 4, 0, 4, 1},             // expectedBoxSizes
                {{},
@@ -537,20 +537,20 @@ void NeighboursSearchTestSuite::insertPointsIntoBoxesCenterBoxFrame()
 
 void NeighboursSearchTestSuite::insertPointsIntoBoxesInnerFrame()
 {
-    TestPoints points = {Point2D(0.5, 2.0), Point2D(1.0, 2.0), Point2D(1.5, 2.0), Point2D(2.5, 2.0), Point2D(3.0, 2.0),
-                         Point2D(3.5, 2.0), Point2D(4.5, 2.0), Point2D(5.0, 2.0), Point2D(5.5, 2.0), Point2D(0.5, 4.0),
-                         Point2D(1.0, 4.0), Point2D(1.5, 4.0), Point2D(2.5, 4.0), Point2D(3.0, 4.0), Point2D(3.5, 4.0),
-                         Point2D(4.5, 4.0), Point2D(5.0, 4.0), Point2D(5.5, 4.0), Point2D(2.0, 0.5), Point2D(2.0, 1.0),
-                         Point2D(2.0, 1.5), Point2D(2.0, 2.5), Point2D(2.0, 3.0), Point2D(2.0, 3.5), Point2D(2.0, 4.5),
-                         Point2D(2.0, 5.0), Point2D(2.0, 5.5), Point2D(4.0, 0.5), Point2D(4.0, 1.0), Point2D(4.0, 1.5),
-                         Point2D(4.0, 2.5), Point2D(4.0, 3.0), Point2D(4.0, 3.5), Point2D(4.0, 4.5), Point2D(4.0, 5.0),
-                         Point2D(4.0, 5.5)};
+    TestPoints points = {Point2F(0.5, 2.f), Point2F(1.f, 2.f), Point2F(1.5, 2.f), Point2F(2.5, 2.f), Point2F(3.f, 2.f),
+                         Point2F(3.5, 2.f), Point2F(4.5, 2.f), Point2F(5.f, 2.f), Point2F(5.5, 2.f), Point2F(0.5, 4.f),
+                         Point2F(1.f, 4.f), Point2F(1.5, 4.f), Point2F(2.5, 4.f), Point2F(3.f, 4.f), Point2F(3.5, 4.f),
+                         Point2F(4.5, 4.f), Point2F(5.f, 4.f), Point2F(5.5, 4.f), Point2F(2.f, 0.5f), Point2F(2.f, 1.f),
+                         Point2F(2.f, 1.5f), Point2F(2.f, 2.5f), Point2F(2.f, 3.f), Point2F(2.f, 3.5f), Point2F(2.f, 4.5f),
+                         Point2F(2.f, 5.f), Point2F(2.f, 5.5f), Point2F(4.f, 0.5f), Point2F(4.f, 1.f), Point2F(4.f, 1.5f),
+                         Point2F(4.f, 2.5f), Point2F(4.f, 3.f), Point2F(4.f, 3.5f), Point2F(4.f, 4.5f), Point2F(4.f, 5.f),
+                         Point2F(4.f, 5.5f)};
 
-    testInsert(Rect(Point2D(0., 0.), Point2D(6.0, 6.0)), // areaRect
-               2.0,                                      // radius
-               0.001,                                    // accuracy
-               points,                                   // points
-               {0, 3, 3, 3, 6, 6, 3, 6, 6},              // expectedBoxSizes
+    testInsert(Rect(Point2F(0.f, 0.f), Point2F(6.f, 6.f)), // areaRect
+               2.f,                                        // radius
+               0.001f,                                     // accuracy
+               points,                                     // points
+               {0, 3, 3, 3, 6, 6, 3, 6, 6},                // expectedBoxSizes
                {{},
                 {18, 19, 20},
                 {27, 28, 29},
@@ -564,33 +564,33 @@ void NeighboursSearchTestSuite::insertPointsIntoBoxesInnerFrame()
 
 void NeighboursSearchTestSuite::insertPointsIntoBoxesTopRightBox()
 {
-    TestPoints points = {Point2D(4.0, 4.0), Point2D(4.5, 4.0), Point2D(5.0, 4.0), Point2D(5.5, 4.0), Point2D(6.0, 4.0),
-                         Point2D(4.0, 4.5), Point2D(4.5, 4.5), Point2D(5.0, 4.5), Point2D(5.5, 4.5), Point2D(6.0, 4.5),
-                         Point2D(4.0, 5.0), Point2D(4.5, 5.0), Point2D(5.0, 5.0), Point2D(5.5, 5.0), Point2D(6.0, 5.0),
-                         Point2D(4.0, 5.5), Point2D(4.5, 5.5), Point2D(5.0, 5.5), Point2D(5.5, 5.5), Point2D(6.0, 5.5),
-                         Point2D(4.0, 6.0), Point2D(4.5, 6.0), Point2D(5.0, 6.0), Point2D(5.5, 6.0), Point2D(6.0, 6.0)};
+    TestPoints points = {Point2F(4.f, 4.f), Point2F(4.5, 4.f), Point2F(5.f, 4.f), Point2F(5.5, 4.f), Point2F(6.f, 4.f),
+                         Point2F(4.f, 4.5f), Point2F(4.5, 4.5f), Point2F(5.f, 4.5f), Point2F(5.5, 4.5f), Point2F(6.f, 4.5f),
+                         Point2F(4.f, 5.f), Point2F(4.5, 5.f), Point2F(5.f, 5.f), Point2F(5.5, 5.f), Point2F(6.f, 5.f),
+                         Point2F(4.f, 5.5f), Point2F(4.5, 5.5f), Point2F(5.f, 5.5f), Point2F(5.5, 5.5f), Point2F(6.f, 5.5f),
+                         Point2F(4.f, 6.f), Point2F(4.5, 6.f), Point2F(5.f, 6.f), Point2F(5.5, 6.f), Point2F(6.f, 6.f)};
 
     testInsert(
-        Rect(Point2D(0., 0.), Point2D(6.0, 6.0)), // areaRect
-        2.0,                                      // radius
-        0.001,                                    // accuracy
-        points,                                   // points
-        {0, 0, 0, 0, 0, 0, 0, 0, 25},             // expectedBoxSizes
+        Rect(Point2F(0.f, 0.f), Point2F(6.f, 6.f)), // areaRect
+        2.0f,                                       // radius
+        0.001f,                                     // accuracy
+        points,                                     // points
+        {0, 0, 0, 0, 0, 0, 0, 0, 25},               // expectedBoxSizes
         {{}, {}, {}, {}, {}, {}, {}, {}, {0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11, 12,
                                           13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24}}); // expectedPointsInBoxes
 }
 
 void NeighboursSearchTestSuite::insertPointsIntoBoxesTopLeftBox()
 {
-    TestPoints points = {Point2D(0.0, 4.0), Point2D(0.5, 4.0), Point2D(1.0, 4.0), Point2D(1.5, 4.0), Point2D(2.0, 4.0),
-                         Point2D(0.0, 4.5), Point2D(0.5, 4.5), Point2D(1.0, 4.5), Point2D(1.5, 4.5), Point2D(2.0, 4.5),
-                         Point2D(0.0, 5.0), Point2D(0.5, 5.0), Point2D(1.0, 5.0), Point2D(1.5, 5.0), Point2D(2.0, 5.0),
-                         Point2D(0.0, 5.5), Point2D(0.5, 5.5), Point2D(1.0, 5.5), Point2D(1.5, 5.5), Point2D(2.0, 5.5),
-                         Point2D(0.0, 6.0), Point2D(0.5, 6.0), Point2D(1.0, 6.0), Point2D(1.5, 6.0), Point2D(2.0, 6.0)};
+    TestPoints points = {Point2F(0.f, 4.f), Point2F(0.5, 4.f), Point2F(1.f, 4.f), Point2F(1.5, 4.f), Point2F(2.f, 4.f),
+                         Point2F(0.f, 4.5f), Point2F(0.5, 4.5f), Point2F(1.f, 4.5f), Point2F(1.5, 4.5f), Point2F(2.f, 4.5f),
+                         Point2F(0.f, 5.f), Point2F(0.5, 5.f), Point2F(1.f, 5.f), Point2F(1.5, 5.f), Point2F(2.f, 5.f),
+                         Point2F(0.f, 5.5f), Point2F(0.5, 5.5f), Point2F(1.f, 5.5f), Point2F(1.5, 5.5f), Point2F(2.f, 5.5f),
+                         Point2F(0.f, 6.f), Point2F(0.5, 6.f), Point2F(1.f, 6.f), Point2F(1.5, 6.f), Point2F(2.f, 6.f)};
 
-    testInsert(Rect(Point2D(0., 0.), Point2D(6.0, 6.0)), // areaRect
-               2.0,                                      // radius
-               0.001,                                    // accuracy
+    testInsert(Rect(Point2F(0.f, 0.f), Point2F(6.f, 6.f)), // areaRect
+               2.f,                                      // radius
+               0.001f,                                    // accuracy
                points,                                   // points
                {0, 0, 0, 0, 0, 0, 20, 5, 0},             // expectedBoxSizes
                {{},
@@ -606,15 +606,15 @@ void NeighboursSearchTestSuite::insertPointsIntoBoxesTopLeftBox()
 
 void NeighboursSearchTestSuite::insertPointsIntoBoxesBottomLeftBox()
 {
-    TestPoints points = {Point2D(0.0, 0.0), Point2D(0.5, 0.0), Point2D(1.0, 0.0), Point2D(1.5, 0.0), Point2D(2.0, 0.0),
-                         Point2D(0.0, 0.5), Point2D(0.5, 0.5), Point2D(1.0, 0.5), Point2D(1.5, 0.5), Point2D(2.0, 0.5),
-                         Point2D(0.0, 1.0), Point2D(0.5, 1.0), Point2D(1.0, 1.0), Point2D(1.5, 1.0), Point2D(2.0, 1.0),
-                         Point2D(0.0, 1.5), Point2D(0.5, 1.5), Point2D(1.0, 1.5), Point2D(1.5, 1.5), Point2D(2.0, 1.5),
-                         Point2D(0.0, 2.0), Point2D(0.5, 2.0), Point2D(1.0, 2.0), Point2D(1.5, 2.0), Point2D(2.0, 2.0)};
+    TestPoints points = {Point2F(0.f, 0.f), Point2F(0.5, 0.f), Point2F(1.f, 0.f), Point2F(1.5, 0.f), Point2F(2.f, 0.f),
+                         Point2F(0.f, 0.5f), Point2F(0.5, 0.5f), Point2F(1.f, 0.5f), Point2F(1.5, 0.5f), Point2F(2.f, 0.5f),
+                         Point2F(0.f, 1.f), Point2F(0.5, 1.f), Point2F(1.f, 1.f), Point2F(1.5, 1.f), Point2F(2.f, 1.f),
+                         Point2F(0.f, 1.5f), Point2F(0.5, 1.5f), Point2F(1.f, 1.5f), Point2F(1.5, 1.5f), Point2F(2.f, 1.5f),
+                         Point2F(0.f, 2.f), Point2F(0.5, 2.f), Point2F(1.f, 2.f), Point2F(1.5, 2.f), Point2F(2.f, 2.f)};
 
-    testInsert(Rect(Point2D(0., 0.), Point2D(6.0, 6.0)), // areaRect
-               2.0,                                      // radius
-               0.001,                                    // accuracy
+    testInsert(Rect(Point2F(0.f, 0.f), Point2F(6.f, 6.f)), // areaRect
+               2.f,                                      // radius
+               0.001f,                                    // accuracy
                points,                                   // points
                {16, 4, 0, 4, 1, 0, 0, 0, 0},             // expectedBoxSizes
                {{0, 1, 2, 3, 5, 6, 7, 8, 10, 11, 12, 13, 15, 16, 17, 18},
@@ -630,15 +630,15 @@ void NeighboursSearchTestSuite::insertPointsIntoBoxesBottomLeftBox()
 
 void NeighboursSearchTestSuite::insertPointsIntoBoxesBottomRightBox()
 {
-    TestPoints points = {Point2D(4.0, 0.0), Point2D(4.5, 0.0), Point2D(5.0, 0.0), Point2D(5.5, 0.0), Point2D(6.0, 0.0),
-                         Point2D(4.0, 0.5), Point2D(4.5, 0.5), Point2D(5.0, 0.5), Point2D(5.5, 0.5), Point2D(6.0, 0.5),
-                         Point2D(4.0, 1.0), Point2D(4.5, 1.0), Point2D(5.0, 1.0), Point2D(5.5, 1.0), Point2D(6.0, 1.0),
-                         Point2D(4.0, 1.5), Point2D(4.5, 1.5), Point2D(5.0, 1.5), Point2D(5.5, 1.5), Point2D(6.0, 1.5),
-                         Point2D(4.0, 2.0), Point2D(4.5, 2.0), Point2D(5.0, 2.0), Point2D(5.5, 2.0), Point2D(6.0, 2.0)};
+    TestPoints points = {Point2F(4.f, 0.f), Point2F(4.5, 0.f), Point2F(5.f, 0.f), Point2F(5.5, 0.f), Point2F(6.f, 0.f),
+                         Point2F(4.f, 0.5f), Point2F(4.5, 0.5f), Point2F(5.f, 0.5f), Point2F(5.5, 0.5f), Point2F(6.f, 0.5f),
+                         Point2F(4.f, 1.f), Point2F(4.5, 1.f), Point2F(5.f, 1.f), Point2F(5.5, 1.f), Point2F(6.f, 1.f),
+                         Point2F(4.f, 1.5f), Point2F(4.5, 1.5f), Point2F(5.f, 1.5f), Point2F(5.5, 1.5f), Point2F(6.f, 1.5f),
+                         Point2F(4.f, 2.f), Point2F(4.5, 2.f), Point2F(5.f, 2.f), Point2F(5.5, 2.f), Point2F(6.f, 2.f)};
 
-    testInsert(Rect(Point2D(0., 0.), Point2D(6.0, 6.0)), // areaRect
-               2.0,                                      // radius
-               0.001,                                    // accuracy
+    testInsert(Rect(Point2F(0.f, 0.f), Point2F(6.f, 6.f)), // areaRect
+               2.f,                                      // radius
+               0.001f,                                    // accuracy
                points,                                   // points
                {0, 0, 20, 0, 0, 5, 0, 0, 0},             // expectedBoxSizes
                {{},
@@ -654,15 +654,15 @@ void NeighboursSearchTestSuite::insertPointsIntoBoxesBottomRightBox()
 
 void NeighboursSearchTestSuite::insertPointsIntoBoxesBottomCenterBox()
 {
-    TestPoints points = {Point2D(2.0, 0.0), Point2D(2.5, 0.0), Point2D(3.0, 0.0), Point2D(3.5, 0.0), Point2D(4.0, 0.0),
-                         Point2D(2.0, 0.5), Point2D(2.5, 0.5), Point2D(3.0, 0.5), Point2D(3.5, 0.5), Point2D(4.0, 0.5),
-                         Point2D(2.0, 1.0), Point2D(2.5, 1.0), Point2D(3.0, 1.0), Point2D(3.5, 1.0), Point2D(4.0, 1.0),
-                         Point2D(2.0, 1.5), Point2D(2.5, 1.5), Point2D(3.0, 1.5), Point2D(3.5, 1.5), Point2D(4.0, 1.5),
-                         Point2D(2.0, 2.0), Point2D(2.5, 2.0), Point2D(3.0, 2.0), Point2D(3.5, 2.0), Point2D(4.0, 2.0)};
+    TestPoints points = {Point2F(2.f, 0.f), Point2F(2.5, 0.f), Point2F(3.f, 0.f), Point2F(3.5, 0.f), Point2F(4.f, 0.f),
+                         Point2F(2.f, 0.5f), Point2F(2.5, 0.5f), Point2F(3.f, 0.5f), Point2F(3.5, 0.5f), Point2F(4.f, 0.5f),
+                         Point2F(2.f, 1.f), Point2F(2.5, 1.f), Point2F(3.f, 1.f), Point2F(3.5, 1.f), Point2F(4.f, 1.f),
+                         Point2F(2.f, 1.5f), Point2F(2.5, 1.5f), Point2F(3.f, 1.5f), Point2F(3.5, 1.5f), Point2F(4.f, 1.5f),
+                         Point2F(2.f, 2.f), Point2F(2.5, 2.f), Point2F(3.f, 2.f), Point2F(3.5, 2.f), Point2F(4.f, 2.f)};
 
-    testInsert(Rect(Point2D(0., 0.), Point2D(6.0, 6.0)), // areaRect
-               2.0,                                      // radius
-               0.001,                                    // accuracy
+    testInsert(Rect(Point2F(0.f, 0.f), Point2F(6.f, 6.f)), // areaRect
+               2.f,                                      // radius
+               0.001f,                                    // accuracy
                points,                                   // points
                {0, 16, 4, 0, 4, 1, 0, 0, 0},             // expectedBoxSizes
                {{},
@@ -678,15 +678,15 @@ void NeighboursSearchTestSuite::insertPointsIntoBoxesBottomCenterBox()
 
 void NeighboursSearchTestSuite::insertPointsIntoBoxesLeftCenterBox()
 {
-    TestPoints points = {Point2D(0.0, 2.0), Point2D(0.5, 2.0), Point2D(1.0, 2.0), Point2D(1.5, 2.0), Point2D(2.0, 2.0),
-                         Point2D(0.0, 2.5), Point2D(0.5, 2.5), Point2D(1.0, 2.5), Point2D(1.5, 2.5), Point2D(2.0, 2.5),
-                         Point2D(0.0, 3.0), Point2D(0.5, 3.0), Point2D(1.0, 3.0), Point2D(1.5, 3.0), Point2D(2.0, 3.0),
-                         Point2D(0.0, 3.5), Point2D(0.5, 3.5), Point2D(1.0, 3.5), Point2D(1.5, 3.5), Point2D(2.0, 3.5),
-                         Point2D(0.0, 4.0), Point2D(0.5, 4.0), Point2D(1.0, 4.0), Point2D(1.5, 4.0), Point2D(2.0, 4.0)};
+    TestPoints points = {Point2F(0.f, 2.f), Point2F(0.5, 2.f), Point2F(1.f, 2.f), Point2F(1.5, 2.f), Point2F(2.f, 2.f),
+                         Point2F(0.f, 2.5f), Point2F(0.5, 2.5f), Point2F(1.f, 2.5f), Point2F(1.5, 2.5f), Point2F(2.f, 2.5f),
+                         Point2F(0.f, 3.f), Point2F(0.5, 3.f), Point2F(1.f, 3.f), Point2F(1.5, 3.f), Point2F(2.f, 3.f),
+                         Point2F(0.f, 3.5f), Point2F(0.5, 3.5f), Point2F(1.f, 3.5f), Point2F(1.5, 3.5f), Point2F(2.f, 3.5f),
+                         Point2F(0.f, 4.f), Point2F(0.5, 4.f), Point2F(1.f, 4.f), Point2F(1.5, 4.f), Point2F(2.f, 4.f)};
 
-    testInsert(Rect(Point2D(0., 0.), Point2D(6.0, 6.0)), // areaRect
-               2.0,                                      // radius
-               0.001,                                    // accuracy
+    testInsert(Rect(Point2F(0.f, 0.f), Point2F(6.f, 6.f)), // areaRect
+               2.f,                                      // radius
+               0.001f,                                    // accuracy
                points,                                   // points
                {0, 0, 0, 16, 4, 0, 4, 1, 0},             // expectedBoxSizes
                {{},
@@ -702,15 +702,15 @@ void NeighboursSearchTestSuite::insertPointsIntoBoxesLeftCenterBox()
 
 void NeighboursSearchTestSuite::insertPointsIntoBoxesTopCenterBox()
 {
-    TestPoints points = {Point2D(2.0, 4.0), Point2D(2.5, 4.0), Point2D(3.0, 4.0), Point2D(3.5, 4.0), Point2D(4.0, 4.0),
-                         Point2D(2.0, 4.5), Point2D(2.5, 4.5), Point2D(3.0, 4.5), Point2D(3.5, 4.5), Point2D(4.0, 4.5),
-                         Point2D(2.0, 5.0), Point2D(2.5, 5.0), Point2D(3.0, 5.0), Point2D(3.5, 5.0), Point2D(4.0, 5.0),
-                         Point2D(2.0, 5.5), Point2D(2.5, 5.5), Point2D(3.0, 5.5), Point2D(3.5, 5.5), Point2D(4.0, 5.5),
-                         Point2D(2.0, 6.0), Point2D(2.5, 6.0), Point2D(3.0, 6.0), Point2D(3.5, 6.0), Point2D(4.0, 6.0)};
+    TestPoints points = {Point2F(2.f, 4.f), Point2F(2.5, 4.f), Point2F(3.f, 4.f), Point2F(3.5, 4.f), Point2F(4.f, 4.f),
+                         Point2F(2.f, 4.5f), Point2F(2.5, 4.5f), Point2F(3.f, 4.5f), Point2F(3.5, 4.5f), Point2F(4.f, 4.5f),
+                         Point2F(2.f, 5.f), Point2F(2.5, 5.f), Point2F(3.f, 5.f), Point2F(3.5, 5.f), Point2F(4.f, 5.f),
+                         Point2F(2.f, 5.5f), Point2F(2.5, 5.5f), Point2F(3.f, 5.5f), Point2F(3.5, 5.5f), Point2F(4.f, 5.5f),
+                         Point2F(2.f, 6.f), Point2F(2.5, 6.f), Point2F(3.f, 6.f), Point2F(3.5, 6.f), Point2F(4.f, 6.f)};
 
-    testInsert(Rect(Point2D(0., 0.), Point2D(6.0, 6.0)), // areaRect
-               2.0,                                      // radius
-               0.001,                                    // accuracy
+    testInsert(Rect(Point2F(0.f, 0.f), Point2F(6.f, 6.f)), // areaRect
+               2.f,                                      // radius
+               0.001f,                                    // accuracy
                points,                                   // points
                {0, 0, 0, 0, 0, 0, 0, 20, 5},             // expectedBoxSizes
                {{},
@@ -726,15 +726,15 @@ void NeighboursSearchTestSuite::insertPointsIntoBoxesTopCenterBox()
 
 void NeighboursSearchTestSuite::insertPointsIntoBoxesRightCenterBox()
 {
-    TestPoints points = {Point2D(4.0, 2.0), Point2D(4.5, 2.0), Point2D(5.0, 2.0), Point2D(5.5, 2.0), Point2D(6.0, 2.0),
-                         Point2D(4.0, 2.5), Point2D(4.5, 2.5), Point2D(5.0, 2.5), Point2D(5.5, 2.5), Point2D(6.0, 2.5),
-                         Point2D(4.0, 3.0), Point2D(4.5, 3.0), Point2D(5.0, 3.0), Point2D(5.5, 3.0), Point2D(6.0, 3.0),
-                         Point2D(4.0, 3.5), Point2D(4.5, 3.5), Point2D(5.0, 3.5), Point2D(5.5, 3.5), Point2D(6.0, 3.5),
-                         Point2D(4.0, 4.0), Point2D(4.5, 4.0), Point2D(5.0, 4.0), Point2D(5.5, 4.0), Point2D(6.0, 4.0)};
+    TestPoints points = {Point2F(4.f, 2.f), Point2F(4.5, 2.f), Point2F(5.f, 2.f), Point2F(5.5, 2.f), Point2F(6.f, 2.f),
+                         Point2F(4.f, 2.5f), Point2F(4.5, 2.5f), Point2F(5.f, 2.5f), Point2F(5.5, 2.5f), Point2F(6.f, 2.5f),
+                         Point2F(4.f, 3.f), Point2F(4.5, 3.f), Point2F(5.f, 3.f), Point2F(5.5, 3.f), Point2F(6.f, 3.f),
+                         Point2F(4.f, 3.5f), Point2F(4.5, 3.5f), Point2F(5.f, 3.5f), Point2F(5.5, 3.5f), Point2F(6.f, 3.5f),
+                         Point2F(4.f, 4.f), Point2F(4.5, 4.f), Point2F(5.f, 4.f), Point2F(5.5, 4.f), Point2F(6.f, 4.f)};
 
-    testInsert(Rect(Point2D(0., 0.), Point2D(6.0, 6.0)), // areaRect
-               2.0,                                      // radius
-               0.001,                                    // accuracy
+    testInsert(Rect(Point2F(0.f, 0.f), Point2F(6.f, 6.f)), // areaRect
+               2.f,                                      // radius
+               0.001f,                                    // accuracy
                points,                                   // points
                {0, 0, 0, 0, 0, 20, 0, 0, 5},             // expectedBoxSizes
                {{},
@@ -750,17 +750,17 @@ void NeighboursSearchTestSuite::insertPointsIntoBoxesRightCenterBox()
 
 void NeighboursSearchTestSuite::insertPointsIntoBoxesBottomLineBox()
 {
-    TestPoints points = {Point2D(0.0, 0.0), Point2D(1.0, 0.0), Point2D(2.0, 0.0), Point2D(3.0, 0.0), Point2D(4.0, 0.0),
-                         Point2D(5.0, 0.0), Point2D(6.0, 0.0), Point2D(0.0, 1.0), Point2D(1.0, 1.0), Point2D(2.0, 1.0),
-                         Point2D(3.0, 1.0), Point2D(4.0, 1.0), Point2D(5.0, 1.0), Point2D(6.0, 1.0), Point2D(0.0, 2.0),
-                         Point2D(1.0, 2.0), Point2D(2.0, 2.0), Point2D(3.0, 2.0), Point2D(4.0, 2.0), Point2D(5.0, 2.0),
-                         Point2D(6.0, 2.0), Point2D(0.5, 0.5), Point2D(1.5, 0.5), Point2D(2.5, 0.5), Point2D(3.5, 0.5),
-                         Point2D(4.5, 0.5), Point2D(5.5, 0.5), Point2D(0.5, 1.5), Point2D(1.5, 1.5), Point2D(2.5, 1.5),
-                         Point2D(3.5, 1.5), Point2D(4.5, 1.5), Point2D(5.5, 1.5)};
+    TestPoints points = {Point2F(0.f, 0.f), Point2F(1.f, 0.f), Point2F(2.f, 0.f), Point2F(3.f, 0.f), Point2F(4.f, 0.f),
+                         Point2F(5.f, 0.f), Point2F(6.f, 0.f), Point2F(0.f, 1.f), Point2F(1.f, 1.f), Point2F(2.f, 1.f),
+                         Point2F(3.f, 1.f), Point2F(4.f, 1.f), Point2F(5.f, 1.f), Point2F(6.f, 1.f), Point2F(0.f, 2.f),
+                         Point2F(1.f, 2.f), Point2F(2.f, 2.f), Point2F(3.f, 2.f), Point2F(4.f, 2.f), Point2F(5.f, 2.f),
+                         Point2F(6.f, 2.f), Point2F(0.5, 0.5f), Point2F(1.5, 0.5f), Point2F(2.5, 0.5f), Point2F(3.5, 0.5f),
+                         Point2F(4.5, 0.5f), Point2F(5.5, 0.5f), Point2F(0.5, 1.5f), Point2F(1.5, 1.5f), Point2F(2.5, 1.5f),
+                         Point2F(3.5, 1.5f), Point2F(4.5, 1.5f), Point2F(5.5, 1.5f)};
 
-    testInsert(Rect(Point2D(0., 0.), Point2D(6.0, 6.0)), // areaRect
-               2.0,                                      // radius
-               0.001,                                    // accuracy
+    testInsert(Rect(Point2F(0.f, 0.f), Point2F(6.f, 6.f)), // areaRect
+               2.f,                                      // radius
+               0.001f,                                    // accuracy
                points,                                   // points
                {8, 8, 10, 2, 2, 3, 0, 0, 0},             // expectedBoxSizes
                {{0, 1, 7, 8, 21, 22, 27, 28},
@@ -776,17 +776,17 @@ void NeighboursSearchTestSuite::insertPointsIntoBoxesBottomLineBox()
 
 void NeighboursSearchTestSuite::insertPointsIntoBoxesLeftLineBox()
 {
-    TestPoints points = {Point2D(0.0, 0.0), Point2D(0.0, 1.0), Point2D(0.0, 2.0), Point2D(0.0, 3.0), Point2D(0.0, 4.0),
-                         Point2D(0.0, 5.0), Point2D(0.0, 6.0), Point2D(1.0, 0.0), Point2D(1.0, 1.0), Point2D(1.0, 2.0),
-                         Point2D(1.0, 3.0), Point2D(1.0, 4.0), Point2D(1.0, 5.0), Point2D(1.0, 6.0), Point2D(2.0, 0.0),
-                         Point2D(2.0, 1.0), Point2D(2.0, 2.0), Point2D(2.0, 3.0), Point2D(2.0, 4.0), Point2D(2.0, 5.0),
-                         Point2D(2.0, 6.0), Point2D(0.5, 0.5), Point2D(0.5, 1.5), Point2D(0.5, 2.5), Point2D(0.5, 3.5),
-                         Point2D(0.5, 4.5), Point2D(0.5, 5.5), Point2D(1.5, 0.5), Point2D(1.5, 1.5), Point2D(1.5, 2.5),
-                         Point2D(1.5, 3.5), Point2D(1.5, 4.5), Point2D(1.5, 5.5)};
+    TestPoints points = {Point2F(0.f, 0.f), Point2F(0.f, 1.f), Point2F(0.f, 2.f), Point2F(0.f, 3.f), Point2F(0.f, 4.f),
+                         Point2F(0.f, 5.f), Point2F(0.f, 6.f), Point2F(1.f, 0.f), Point2F(1.f, 1.f), Point2F(1.f, 2.f),
+                         Point2F(1.f, 3.f), Point2F(1.f, 4.f), Point2F(1.f, 5.f), Point2F(1.f, 6.f), Point2F(2.f, 0.f),
+                         Point2F(2.f, 1.f), Point2F(2.f, 2.f), Point2F(2.f, 3.f), Point2F(2.f, 4.f), Point2F(2.f, 5.f),
+                         Point2F(2.f, 6.f), Point2F(0.5, 0.5f), Point2F(0.5, 1.5f), Point2F(0.5, 2.5f), Point2F(0.5, 3.5f),
+                         Point2F(0.5, 4.5f), Point2F(0.5, 5.5f), Point2F(1.5, 0.5f), Point2F(1.5, 1.5f), Point2F(1.5, 2.5f),
+                         Point2F(1.5, 3.5f), Point2F(1.5, 4.5f), Point2F(1.5, 5.5f)};
 
-    testInsert(Rect(Point2D(0., 0.), Point2D(6.0, 6.0)), // areaRect
-               2.0,                                      // radius
-               0.001,                                    // accuracy
+    testInsert(Rect(Point2F(0.f, 0.f), Point2F(6.f, 6.f)), // areaRect
+               2.f,                                      // radius
+               0.001f,                                    // accuracy
                points,                                   // points
                {8, 2, 0, 8, 2, 0, 10, 3, 0},             // expectedBoxSizes
                {{0, 1, 7, 8, 21, 22, 27, 28},
@@ -802,17 +802,17 @@ void NeighboursSearchTestSuite::insertPointsIntoBoxesLeftLineBox()
 
 void NeighboursSearchTestSuite::insertPointsIntoBoxesTopLineBox()
 {
-    TestPoints points = {Point2D(0.0, 4.0), Point2D(1.0, 4.0), Point2D(2.0, 4.0), Point2D(3.0, 4.0), Point2D(4.0, 4.0),
-                         Point2D(5.0, 4.0), Point2D(6.0, 4.0), Point2D(0.0, 5.0), Point2D(1.0, 5.0), Point2D(2.0, 5.0),
-                         Point2D(3.0, 5.0), Point2D(4.0, 5.0), Point2D(5.0, 5.0), Point2D(6.0, 5.0), Point2D(0.0, 6.0),
-                         Point2D(1.0, 6.0), Point2D(2.0, 6.0), Point2D(3.0, 6.0), Point2D(4.0, 6.0), Point2D(5.0, 6.0),
-                         Point2D(6.0, 6.0), Point2D(0.5, 4.5), Point2D(1.5, 4.5), Point2D(2.5, 4.5), Point2D(3.5, 4.5),
-                         Point2D(4.5, 4.5), Point2D(5.5, 4.5), Point2D(0.5, 5.5), Point2D(1.5, 5.5), Point2D(2.5, 5.5),
-                         Point2D(3.5, 5.5), Point2D(4.5, 5.5), Point2D(5.5, 5.5)};
+    TestPoints points = {Point2F(0.f, 4.f), Point2F(1.f, 4.f), Point2F(2.f, 4.f), Point2F(3.f, 4.f), Point2F(4.f, 4.f),
+                         Point2F(5.f, 4.f), Point2F(6.f, 4.f), Point2F(0.f, 5.f), Point2F(1.f, 5.f), Point2F(2.f, 5.f),
+                         Point2F(3.f, 5.f), Point2F(4.f, 5.f), Point2F(5.f, 5.f), Point2F(6.f, 5.f), Point2F(0.f, 6.f),
+                         Point2F(1.f, 6.f), Point2F(2.f, 6.f), Point2F(3.f, 6.f), Point2F(4.f, 6.f), Point2F(5.f, 6.f),
+                         Point2F(6.f, 6.f), Point2F(0.5, 4.5f), Point2F(1.5, 4.5f), Point2F(2.5, 4.5f), Point2F(3.5, 4.5f),
+                         Point2F(4.5, 4.5f), Point2F(5.5, 4.5f), Point2F(0.5, 5.5f), Point2F(1.5, 5.5f), Point2F(2.5, 5.5f),
+                         Point2F(3.5, 5.5f), Point2F(4.5, 5.5f), Point2F(5.5, 5.5f)};
 
-    testInsert(Rect(Point2D(0., 0.), Point2D(6.0, 6.0)), // areaRect
-               2.0,                                      // radius
-               0.001,                                    // accuracy
+    testInsert(Rect(Point2F(0.f, 0.f), Point2F(6.f, 6.f)), // areaRect
+               2.f,                                      // radius
+               0.001f,                                    // accuracy
                points,                                   // points
                {0, 0, 0, 0, 0, 0, 10, 10, 13},           // expectedBoxSizes
                {{},
@@ -828,17 +828,17 @@ void NeighboursSearchTestSuite::insertPointsIntoBoxesTopLineBox()
 
 void NeighboursSearchTestSuite::insertPointsIntoBoxesRightLineBox()
 {
-    TestPoints points = {Point2D(4.0, 0.0), Point2D(4.0, 1.0), Point2D(4.0, 2.0), Point2D(4.0, 3.0), Point2D(4.0, 4.0),
-                         Point2D(4.0, 5.0), Point2D(4.0, 6.0), Point2D(5.0, 0.0), Point2D(5.0, 1.0), Point2D(5.0, 2.0),
-                         Point2D(5.0, 3.0), Point2D(5.0, 4.0), Point2D(5.0, 5.0), Point2D(5.0, 6.0), Point2D(6.0, 0.0),
-                         Point2D(6.0, 1.0), Point2D(6.0, 2.0), Point2D(6.0, 3.0), Point2D(6.0, 4.0), Point2D(6.0, 5.0),
-                         Point2D(6.0, 6.0), Point2D(4.5, 0.5), Point2D(4.5, 1.5), Point2D(4.5, 2.5), Point2D(4.5, 3.5),
-                         Point2D(4.5, 4.5), Point2D(4.5, 5.5), Point2D(5.5, 0.5), Point2D(5.5, 1.5), Point2D(5.5, 2.5),
-                         Point2D(5.5, 3.5), Point2D(5.5, 4.5), Point2D(5.5, 5.5)};
+    TestPoints points = {Point2F(4.f, 0.f), Point2F(4.f, 1.f), Point2F(4.f, 2.f), Point2F(4.f, 3.f), Point2F(4.f, 4.f),
+                         Point2F(4.f, 5.f), Point2F(4.f, 6.f), Point2F(5.f, 0.f), Point2F(5.f, 1.f), Point2F(5.f, 2.f),
+                         Point2F(5.f, 3.f), Point2F(5.f, 4.f), Point2F(5.f, 5.f), Point2F(5.f, 6.f), Point2F(6.f, 0.f),
+                         Point2F(6.f, 1.f), Point2F(6.f, 2.f), Point2F(6.f, 3.f), Point2F(6.f, 4.f), Point2F(6.f, 5.f),
+                         Point2F(6.f, 6.f), Point2F(4.5, 0.5f), Point2F(4.5, 1.5f), Point2F(4.5, 2.5f), Point2F(4.5, 3.5f),
+                         Point2F(4.5, 4.5f), Point2F(4.5, 5.5f), Point2F(5.5, 0.5f), Point2F(5.5, 1.5f), Point2F(5.5, 2.5f),
+                         Point2F(5.5, 3.5f), Point2F(5.5, 4.5f), Point2F(5.5, 5.5f)};
 
-    testInsert(Rect(Point2D(0., 0.), Point2D(6.0, 6.0)), // areaRect
-               2.0,                                      // radius
-               0.001,                                    // accuracy
+    testInsert(Rect(Point2F(0.f, 0.f), Point2F(6.f, 6.f)), // areaRect
+               2.f,                                      // radius
+               0.001f,                                    // accuracy
                points,                                   // points
                {0, 0, 10, 0, 0, 10, 0, 0, 13},           // expectedBoxSizes
                {{},
@@ -854,14 +854,14 @@ void NeighboursSearchTestSuite::insertPointsIntoBoxesRightLineBox()
 
 void NeighboursSearchTestSuite::insertPointsIntoBoxes3x2()
 {
-    TestPoints points = {Point2D(0.0, 0.0), Point2D(1.0, 0.0), Point2D(2.0, 0.0), Point2D(3.0, 0.0), Point2D(0.0, 1.0),
-                         Point2D(1.0, 1.0), Point2D(2.0, 1.0), Point2D(3.0, 1.0), Point2D(0.0, 2.0), Point2D(1.0, 2.0),
-                         Point2D(2.0, 2.0), Point2D(3.0, 2.0), Point2D(0.5, 0.5), Point2D(1.5, 0.5), Point2D(2.5, 0.5),
-                         Point2D(0.5, 1.5), Point2D(1.5, 1.5), Point2D(2.5, 1.5)};
+    TestPoints points = {Point2F(0.f, 0.f), Point2F(1.f, 0.f), Point2F(2.f, 0.f), Point2F(3.f, 0.f), Point2F(0.f, 1.f),
+                         Point2F(1.f, 1.f), Point2F(2.f, 1.f), Point2F(3.f, 1.f), Point2F(0.f, 2.f), Point2F(1.f, 2.f),
+                         Point2F(2.f, 2.f), Point2F(3.f, 2.f), Point2F(0.5, 0.5f), Point2F(1.5, 0.5f), Point2F(2.5, 0.5f),
+                         Point2F(0.5, 1.5f), Point2F(1.5, 1.5f), Point2F(2.5, 1.5f)};
 
-    testInsert(Rect(Point2D(0.0, 0.0), Point2D(3.0, 2.0)),                                  // areaRect
-               1.0,                                                                         // radius
-               0.001,                                                                       // accuracy
+    testInsert(Rect(Point2F(0.f, 0.f), Point2F(3.f, 2.f)),                                  // areaRect
+               1.f,                                                                         // radius
+               0.001f,                                                                       // accuracy
                points,                                                                      // points
                {2, 2, 3, 3, 3, 5},                                                          // expectedBoxSizes
                {{0, 12}, {1, 13}, {2, 3, 14}, {4, 8, 15}, {5, 9, 16}, {6, 7, 10, 11, 17}}); // expectedPointsInBoxes
@@ -869,15 +869,15 @@ void NeighboursSearchTestSuite::insertPointsIntoBoxes3x2()
 
 void NeighboursSearchTestSuite::insertPointsIntoBoxes4x2()
 {
-    TestPoints points = {Point2D(0.0, 0.0), Point2D(1.0, 0.0), Point2D(2.0, 0.0), Point2D(3.0, 0.0), Point2D(4.0, 0.0),
-                         Point2D(0.0, 1.0), Point2D(1.0, 1.0), Point2D(2.0, 1.0), Point2D(3.0, 1.0), Point2D(4.0, 1.0),
-                         Point2D(0.0, 2.0), Point2D(1.0, 2.0), Point2D(2.0, 2.0), Point2D(3.0, 2.0), Point2D(4.0, 2.0),
-                         Point2D(0.5, 0.5), Point2D(1.5, 0.5), Point2D(2.5, 0.5), Point2D(3.5, 0.5), Point2D(0.5, 1.5),
-                         Point2D(1.5, 1.5), Point2D(2.5, 1.5), Point2D(3.5, 1.5)};
+    TestPoints points = {Point2F(0.f, 0.f), Point2F(1.f, 0.f), Point2F(2.f, 0.f), Point2F(3.f, 0.f), Point2F(4.f, 0.f),
+                         Point2F(0.f, 1.f), Point2F(1.f, 1.f), Point2F(2.f, 1.f), Point2F(3.f, 1.f), Point2F(4.f, 1.f),
+                         Point2F(0.f, 2.f), Point2F(1.f, 2.f), Point2F(2.f, 2.f), Point2F(3.f, 2.f), Point2F(4.f, 2.f),
+                         Point2F(0.5, 0.5f), Point2F(1.5, 0.5f), Point2F(2.5, 0.5f), Point2F(3.5, 0.5f), Point2F(0.5, 1.5f),
+                         Point2F(1.5, 1.5f), Point2F(2.5, 1.5f), Point2F(3.5, 1.5f)};
 
-    testInsert(Rect(Point2D(0.0, 0.0), Point2D(4.0, 2.0)), // areaRect
-               1.0,                                        // radius
-               0.001,                                      // accuracy
+    testInsert(Rect(Point2F(0.f, 0.f), Point2F(4.f, 2.f)), // areaRect
+               1.f,                                        // radius
+               0.001f,                                      // accuracy
                points,                                     // points
                {2, 2, 2, 3, 3, 3, 3, 5},                   // expectedBoxSizes
                {{0, 15},
@@ -892,15 +892,15 @@ void NeighboursSearchTestSuite::insertPointsIntoBoxes4x2()
 
 void NeighboursSearchTestSuite::insertPointsIntoBoxes2x4()
 {
-    TestPoints points = {Point2D(0.0, 0.0), Point2D(1.0, 0.0), Point2D(2.0, 0.0), Point2D(0.0, 1.0), Point2D(1.0, 1.0),
-                         Point2D(2.0, 1.0), Point2D(0.0, 2.0), Point2D(1.0, 2.0), Point2D(2.0, 2.0), Point2D(0.0, 3.0),
-                         Point2D(1.0, 3.0), Point2D(2.0, 3.0), Point2D(0.0, 4.0), Point2D(1.0, 4.0), Point2D(2.0, 4.0),
-                         Point2D(0.5, 0.5), Point2D(1.5, 0.5), Point2D(0.5, 1.5), Point2D(1.5, 1.5), Point2D(0.5, 2.5),
-                         Point2D(1.5, 2.5), Point2D(0.5, 3.5), Point2D(1.5, 3.5)};
+    TestPoints points = {Point2F(0.f, 0.f), Point2F(1.f, 0.f), Point2F(2.f, 0.f), Point2F(0.f, 1.f), Point2F(1.f, 1.f),
+                         Point2F(2.f, 1.f), Point2F(0.f, 2.f), Point2F(1.f, 2.f), Point2F(2.f, 2.f), Point2F(0.f, 3.f),
+                         Point2F(1.f, 3.f), Point2F(2.f, 3.f), Point2F(0.f, 4.f), Point2F(1.f, 4.f), Point2F(2.f, 4.f),
+                         Point2F(0.5, 0.5f), Point2F(1.5, 0.5f), Point2F(0.5, 1.5f), Point2F(1.5, 1.5f), Point2F(0.5, 2.5f),
+                         Point2F(1.5, 2.5f), Point2F(0.5, 3.5f), Point2F(1.5, 3.5f)};
 
-    testInsert(Rect(Point2D(0.0, 0.0), Point2D(2.0, 4.0)), // areaRect
-               1.0,                                        // radius
-               0.001,                                      // accuracy
+    testInsert(Rect(Point2F(0.f, 0.f), Point2F(2.f, 4.f)), // areaRect
+               1.f,                                        // radius
+               0.001f,                                      // accuracy
                points,                                     // points
                {2, 3, 2, 3, 2, 3, 3, 5},                   // expectedBoxSizes
                {{0, 15},
@@ -916,23 +916,23 @@ void NeighboursSearchTestSuite::insertPointsIntoBoxes2x4()
 void NeighboursSearchTestSuite::insertPointsIntoBoxes8x3()
 {
     TestPoints points = {
-        Point2D(0.0, 0.0), Point2D(1.0, 0.0), Point2D(2.0, 0.0), Point2D(3.0, 0.0), Point2D(4.0, 0.0),
-        Point2D(5.0, 0.0), Point2D(6.0, 0.0), Point2D(7.0, 0.0), Point2D(8.0, 0.0), Point2D(0.0, 1.0),
-        Point2D(1.0, 1.0), Point2D(2.0, 1.0), Point2D(3.0, 1.0), Point2D(4.0, 1.0), Point2D(5.0, 1.0),
-        Point2D(6.0, 1.0), Point2D(7.0, 1.0), Point2D(8.0, 1.0), Point2D(0.0, 2.0), Point2D(1.0, 2.0),
-        Point2D(2.0, 2.0), Point2D(3.0, 2.0), Point2D(4.0, 2.0), Point2D(5.0, 2.0), Point2D(6.0, 2.0),
-        Point2D(7.0, 2.0), Point2D(8.0, 2.0), Point2D(0.0, 3.0), Point2D(1.0, 3.0), Point2D(2.0, 3.0),
-        Point2D(3.0, 3.0), Point2D(4.0, 3.0), Point2D(5.0, 3.0), Point2D(6.0, 3.0), Point2D(7.0, 3.0),
-        Point2D(8.0, 3.0), Point2D(0.5, 0.5), Point2D(1.5, 0.5), Point2D(2.5, 0.5), Point2D(3.5, 0.5),
-        Point2D(4.5, 0.5), Point2D(5.5, 0.5), Point2D(6.5, 0.5), Point2D(7.5, 0.5), Point2D(0.5, 1.5),
-        Point2D(1.5, 1.5), Point2D(2.5, 1.5), Point2D(3.5, 1.5), Point2D(4.5, 1.5), Point2D(5.5, 1.5),
-        Point2D(6.5, 1.5), Point2D(7.5, 1.5), Point2D(0.5, 2.5), Point2D(1.5, 2.5), Point2D(2.5, 2.5),
-        Point2D(3.5, 2.5), Point2D(4.5, 2.5), Point2D(5.5, 2.5), Point2D(6.5, 2.5), Point2D(7.5, 2.5),
+        Point2F(0.f, 0.f), Point2F(1.f, 0.f), Point2F(2.f, 0.f), Point2F(3.f, 0.f), Point2F(4.f, 0.f),
+        Point2F(5.f, 0.f), Point2F(6.f, 0.f), Point2F(7.f, 0.f), Point2F(8.f, 0.f), Point2F(0.f, 1.f),
+        Point2F(1.f, 1.f), Point2F(2.f, 1.f), Point2F(3.f, 1.f), Point2F(4.f, 1.f), Point2F(5.f, 1.f),
+        Point2F(6.f, 1.f), Point2F(7.f, 1.f), Point2F(8.f, 1.f), Point2F(0.f, 2.f), Point2F(1.f, 2.f),
+        Point2F(2.f, 2.f), Point2F(3.f, 2.f), Point2F(4.f, 2.f), Point2F(5.f, 2.f), Point2F(6.f, 2.f),
+        Point2F(7.f, 2.f), Point2F(8.f, 2.f), Point2F(0.f, 3.f), Point2F(1.f, 3.f), Point2F(2.f, 3.f),
+        Point2F(3.f, 3.f), Point2F(4.f, 3.f), Point2F(5.f, 3.f), Point2F(6.f, 3.f), Point2F(7.f, 3.f),
+        Point2F(8.f, 3.f), Point2F(0.5, 0.5f), Point2F(1.5, 0.5f), Point2F(2.5, 0.5f), Point2F(3.5, 0.5f),
+        Point2F(4.5, 0.5f), Point2F(5.5, 0.5f), Point2F(6.5, 0.5f), Point2F(7.5, 0.5f), Point2F(0.5, 1.5f),
+        Point2F(1.5, 1.5f), Point2F(2.5, 1.5f), Point2F(3.5, 1.5f), Point2F(4.5, 1.5f), Point2F(5.5, 1.5f),
+        Point2F(6.5, 1.5f), Point2F(7.5, 1.5f), Point2F(0.5, 2.5f), Point2F(1.5, 2.5f), Point2F(2.5, 2.5f),
+        Point2F(3.5, 2.5f), Point2F(4.5, 2.5f), Point2F(5.5, 2.5f), Point2F(6.5, 2.5f), Point2F(7.5, 2.5f),
     };
 
-    testInsert(Rect(Point2D(0.0, 0.0), Point2D(8.0, 3.0)),                               // areaRect
-               1.0,                                                                      // radius
-               0.001,                                                                    // accuracy
+    testInsert(Rect(Point2F(0.f, 0.f), Point2F(8.f, 3.f)),                               // areaRect
+               1.f,                                                                      // radius
+               0.001f,                                                                    // accuracy
                points,                                                                   // points
                {2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 5}, // expectedBoxSizes
                {{0, 36},      {1, 37},      {2, 38},      {3, 39},
@@ -945,36 +945,36 @@ void NeighboursSearchTestSuite::insertPointsIntoBoxes8x3()
 
 void NeighboursSearchTestSuite::insertPointsIntoBoxes9x6()
 {
-    TestPoints points = {Point2D(0.0, 0.0), Point2D(1.0, 0.0), Point2D(2.0, 0.0), Point2D(3.0, 0.0), Point2D(4.0, 0.0),
-                         Point2D(5.0, 0.0), Point2D(6.0, 0.0), Point2D(7.0, 0.0), Point2D(8.0, 0.0), Point2D(9.0, 0.0),
-                         Point2D(0.0, 1.0), Point2D(1.0, 1.0), Point2D(2.0, 1.0), Point2D(3.0, 1.0), Point2D(4.0, 1.0),
-                         Point2D(5.0, 1.0), Point2D(6.0, 1.0), Point2D(7.0, 1.0), Point2D(8.0, 1.0), Point2D(9.0, 1.0),
-                         Point2D(0.0, 2.0), Point2D(1.0, 2.0), Point2D(2.0, 2.0), Point2D(3.0, 2.0), Point2D(4.0, 2.0),
-                         Point2D(5.0, 2.0), Point2D(6.0, 2.0), Point2D(7.0, 2.0), Point2D(8.0, 2.0), Point2D(9.0, 2.0),
-                         Point2D(0.0, 3.0), Point2D(1.0, 3.0), Point2D(2.0, 3.0), Point2D(3.0, 3.0), Point2D(4.0, 3.0),
-                         Point2D(5.0, 3.0), Point2D(6.0, 3.0), Point2D(7.0, 3.0), Point2D(8.0, 3.0), Point2D(9.0, 3.0),
-                         Point2D(0.0, 4.0), Point2D(1.0, 4.0), Point2D(2.0, 4.0), Point2D(3.0, 4.0), Point2D(4.0, 4.0),
-                         Point2D(5.0, 4.0), Point2D(6.0, 4.0), Point2D(7.0, 4.0), Point2D(8.0, 4.0), Point2D(9.0, 4.0),
-                         Point2D(0.0, 5.0), Point2D(1.0, 5.0), Point2D(2.0, 5.0), Point2D(3.0, 5.0), Point2D(4.0, 5.0),
-                         Point2D(5.0, 5.0), Point2D(6.0, 5.0), Point2D(7.0, 5.0), Point2D(8.0, 5.0), Point2D(9.0, 5.0),
-                         Point2D(0.0, 6.0), Point2D(1.0, 6.0), Point2D(2.0, 6.0), Point2D(3.0, 6.0), Point2D(4.0, 6.0),
-                         Point2D(5.0, 6.0), Point2D(6.0, 6.0), Point2D(7.0, 6.0), Point2D(8.0, 6.0), Point2D(9.0, 6.0),
+    TestPoints points = {Point2F(0.f, 0.f), Point2F(1.f, 0.f), Point2F(2.f, 0.f), Point2F(3.f, 0.f), Point2F(4.f, 0.f),
+                         Point2F(5.f, 0.f), Point2F(6.f, 0.f), Point2F(7.f, 0.f), Point2F(8.f, 0.f), Point2F(9.f, 0.f),
+                         Point2F(0.f, 1.f), Point2F(1.f, 1.f), Point2F(2.f, 1.f), Point2F(3.f, 1.f), Point2F(4.f, 1.f),
+                         Point2F(5.f, 1.f), Point2F(6.f, 1.f), Point2F(7.f, 1.f), Point2F(8.f, 1.f), Point2F(9.f, 1.f),
+                         Point2F(0.f, 2.f), Point2F(1.f, 2.f), Point2F(2.f, 2.f), Point2F(3.f, 2.f), Point2F(4.f, 2.f),
+                         Point2F(5.f, 2.f), Point2F(6.f, 2.f), Point2F(7.f, 2.f), Point2F(8.f, 2.f), Point2F(9.f, 2.f),
+                         Point2F(0.f, 3.f), Point2F(1.f, 3.f), Point2F(2.f, 3.f), Point2F(3.f, 3.f), Point2F(4.f, 3.f),
+                         Point2F(5.f, 3.f), Point2F(6.f, 3.f), Point2F(7.f, 3.f), Point2F(8.f, 3.f), Point2F(9.f, 3.f),
+                         Point2F(0.f, 4.f), Point2F(1.f, 4.f), Point2F(2.f, 4.f), Point2F(3.f, 4.f), Point2F(4.f, 4.f),
+                         Point2F(5.f, 4.f), Point2F(6.f, 4.f), Point2F(7.f, 4.f), Point2F(8.f, 4.f), Point2F(9.f, 4.f),
+                         Point2F(0.f, 5.f), Point2F(1.f, 5.f), Point2F(2.f, 5.f), Point2F(3.f, 5.f), Point2F(4.f, 5.f),
+                         Point2F(5.f, 5.f), Point2F(6.f, 5.f), Point2F(7.f, 5.f), Point2F(8.f, 5.f), Point2F(9.f, 5.f),
+                         Point2F(0.f, 6.f), Point2F(1.f, 6.f), Point2F(2.f, 6.f), Point2F(3.f, 6.f), Point2F(4.f, 6.f),
+                         Point2F(5.f, 6.f), Point2F(6.f, 6.f), Point2F(7.f, 6.f), Point2F(8.f, 6.f), Point2F(9.f, 6.f),
 
-                         Point2D(0.5, 0.5), Point2D(1.5, 0.5), Point2D(2.5, 0.5), Point2D(3.5, 0.5), Point2D(4.5, 0.5),
-                         Point2D(5.5, 0.5), Point2D(6.5, 0.5), Point2D(7.5, 0.5), Point2D(8.5, 0.5), Point2D(0.5, 1.5),
-                         Point2D(1.5, 1.5), Point2D(2.5, 1.5), Point2D(3.5, 1.5), Point2D(4.5, 1.5), Point2D(5.5, 1.5),
-                         Point2D(6.5, 1.5), Point2D(7.5, 1.5), Point2D(8.5, 1.5), Point2D(0.5, 2.5), Point2D(1.5, 2.5),
-                         Point2D(2.5, 2.5), Point2D(3.5, 2.5), Point2D(4.5, 2.5), Point2D(5.5, 2.5), Point2D(6.5, 2.5),
-                         Point2D(7.5, 2.5), Point2D(8.5, 2.5), Point2D(0.5, 3.5), Point2D(1.5, 3.5), Point2D(2.5, 3.5),
-                         Point2D(3.5, 3.5), Point2D(4.5, 3.5), Point2D(5.5, 3.5), Point2D(6.5, 3.5), Point2D(7.5, 3.5),
-                         Point2D(8.5, 3.5), Point2D(0.5, 4.5), Point2D(1.5, 4.5), Point2D(2.5, 4.5), Point2D(3.5, 4.5),
-                         Point2D(4.5, 4.5), Point2D(5.5, 4.5), Point2D(6.5, 4.5), Point2D(7.5, 4.5), Point2D(8.5, 4.5),
-                         Point2D(0.5, 5.5), Point2D(1.5, 5.5), Point2D(2.5, 5.5), Point2D(3.5, 5.5), Point2D(4.5, 5.5),
-                         Point2D(5.5, 5.5), Point2D(6.5, 5.5), Point2D(7.5, 5.5), Point2D(8.5, 5.5)};
+                         Point2F(0.5, 0.5f), Point2F(1.5, 0.5f), Point2F(2.5, 0.5f), Point2F(3.5, 0.5f), Point2F(4.5, 0.5f),
+                         Point2F(5.5, 0.5f), Point2F(6.5, 0.5f), Point2F(7.5, 0.5f), Point2F(8.5, 0.5f), Point2F(0.5, 1.5f),
+                         Point2F(1.5, 1.5f), Point2F(2.5, 1.5f), Point2F(3.5, 1.5f), Point2F(4.5, 1.5f), Point2F(5.5, 1.5f),
+                         Point2F(6.5, 1.5f), Point2F(7.5, 1.5f), Point2F(8.5, 1.5f), Point2F(0.5, 2.5f), Point2F(1.5, 2.5f),
+                         Point2F(2.5, 2.5f), Point2F(3.5, 2.5f), Point2F(4.5, 2.5f), Point2F(5.5, 2.5f), Point2F(6.5, 2.5f),
+                         Point2F(7.5, 2.5f), Point2F(8.5, 2.5f), Point2F(0.5, 3.5f), Point2F(1.5, 3.5f), Point2F(2.5, 3.5f),
+                         Point2F(3.5, 3.5f), Point2F(4.5, 3.5f), Point2F(5.5, 3.5f), Point2F(6.5, 3.5f), Point2F(7.5, 3.5f),
+                         Point2F(8.5, 3.5f), Point2F(0.5, 4.5f), Point2F(1.5, 4.5f), Point2F(2.5, 4.5f), Point2F(3.5, 4.5f),
+                         Point2F(4.5, 4.5f), Point2F(5.5, 4.5f), Point2F(6.5, 4.5f), Point2F(7.5, 4.5f), Point2F(8.5, 4.5f),
+                         Point2F(0.5, 5.5f), Point2F(1.5, 5.5f), Point2F(2.5, 5.5f), Point2F(3.5, 5.5f), Point2F(4.5, 5.5f),
+                         Point2F(5.5, 5.5f), Point2F(6.5, 5.5f), Point2F(7.5, 5.5f), Point2F(8.5, 5.5f)};
 
-    testInsert(Rect(Point2D(0.0, 0.0), Point2D(9.0, 6.0)), // areaRect
-               1.0,                                        // radius
-               0.001,                                      // accuracy
+    testInsert(Rect(Point2F(0.f, 0.f), Point2F(9.f, 6.f)), // areaRect
+               1.f,                                        // radius
+               0.001f,                                      // accuracy
                points,                                     // points
                {2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 3,
                 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5}, // expectedBoxSizes
@@ -1002,12 +1002,12 @@ void NeighboursSearchTestSuite::insertPointsIntoBoxes9x6()
 
 void NeighboursSearchTestSuite::findNearbyBoxesTwoByTwo()
 {
-    Rect rect(Point2D(0., 0.), Point2D(4.0, 4.0));
+    Rect rect(Point2F(0.f, 0.f), Point2F(4.f, 4.f));
     Area area(rect);
 
     const VectorOfSizetVectors expectedNearbyBoxes = {{2, 1, 3}, {3, 0, 2}, {0, 3, 1}, {1, 2, 0}};
 
-    NeighboursSearch<Point2DVector> ns(area, 2.0, 0.001);
+    NeighboursSearch<Point2FVector> ns(area, 2.f, 0.001);
 
     ASSERT_EQ(ns.m_boxes.size(), ns.m_nearbyBoxes.size())
         << "The amount of boxes have to be equal in m_boxes and m_nearbyBoxes";
@@ -1021,13 +1021,13 @@ void NeighboursSearchTestSuite::findNearbyBoxesTwoByTwo()
 
 void NeighboursSearchTestSuite::findNearbyBoxesFourByTwo()
 {
-    Rect rect(Point2D(0., 0.), Point2D(2.0, 4.0));
+    Rect rect(Point2F(0.f, 0.f), Point2F(2.f, 4.f));
     Area area(rect);
 
     const VectorOfSizetVectors expectedNearbyBoxes = {
         {2, 1, 3}, {3, 0, 2}, {0, 4, 3, 1, 5}, {1, 5, 2, 0, 4}, {2, 6, 5, 3, 7}, {3, 7, 4, 2, 6}, {4, 7, 5}, {5, 6, 4}};
 
-    NeighboursSearch<Point2DVector> ns(area, 1.0, 0.001);
+    NeighboursSearch<Point2FVector> ns(area, 1.f, 0.001);
 
     ASSERT_EQ(ns.m_boxes.size(), ns.m_nearbyBoxes.size())
         << "The amount of boxes have to be equal in m_boxes and m_nearbyBoxes";
@@ -1041,7 +1041,7 @@ void NeighboursSearchTestSuite::findNearbyBoxesFourByTwo()
 
 void NeighboursSearchTestSuite::findNearbyBoxesFourByFour()
 {
-    Rect rect(Point2D(0., 0.), Point2D(4.0, 4.0));
+    Rect rect(Point2F(0.f, 0.f), Point2F(4.f, 4.f));
     Area area(rect);
 
     const VectorOfSizetVectors expectedNearbyBoxes = {{4, 1, 5},
@@ -1061,7 +1061,7 @@ void NeighboursSearchTestSuite::findNearbyBoxesFourByFour()
                                                       {10, 13, 15, 9, 11},
                                                       {11, 14, 10}};
 
-    NeighboursSearch<Point2DVector> ns(area, 1.0, 0.001);
+    NeighboursSearch<Point2FVector> ns(area, 1.f, 0.001);
 
     ASSERT_EQ(ns.m_boxes.size(), ns.m_nearbyBoxes.size())
         << "The amount of boxes have to be equal in m_boxes and m_nearbyBoxes";
@@ -1075,7 +1075,7 @@ void NeighboursSearchTestSuite::findNearbyBoxesFourByFour()
 
 void NeighboursSearchTestSuite::findNearbyBoxesFourByThree()
 {
-    Rect rect(Point2D(0., 0.), Point2D(3.0, 4.0));
+    Rect rect(Point2F(0.f, 0.f), Point2F(3.f, 4.f));
     Area area(rect);
 
     const VectorOfSizetVectors expectedNearbyBoxes = {{3, 1, 4},
@@ -1091,7 +1091,7 @@ void NeighboursSearchTestSuite::findNearbyBoxesFourByThree()
                                                       {7, 9, 11, 6, 8},
                                                       {8, 10, 7}};
 
-    NeighboursSearch<Point2DVector> ns(area, 1.0, 0.001);
+    NeighboursSearch<Point2FVector> ns(area, 1.f, 0.001);
 
     EXPECT_EQ(ns.m_boxes.size(), ns.m_nearbyBoxes.size())
         << "The amount of boxes have to be equal in m_boxes and m_nearbyBoxes";
@@ -1105,14 +1105,14 @@ void NeighboursSearchTestSuite::findNearbyBoxesFourByThree()
 
 void NeighboursSearchTestSuite::findNearbyBoxesThreeByThree()
 {
-    Rect rect(Point2D(0., 0.), Point2D(6.0, 6.0));
+    Rect rect(Point2F(0.f, 0.f), Point2F(6.f, 6.f));
     Area area(rect);
 
     const VectorOfSizetVectors expectedNearbyBoxes = {{3, 1, 4},       {4, 0, 2, 3, 5},          {5, 1, 4},
                                                       {0, 6, 4, 1, 7}, {1, 7, 3, 5, 0, 6, 2, 8}, {2, 8, 4, 1, 7},
                                                       {3, 7, 4},       {4, 6, 8, 3, 5},          {5, 7, 4}};
 
-    NeighboursSearch<Point2DVector> ns(area, 2.0, 0.001);
+    NeighboursSearch<Point2FVector> ns(area, 2.f, 0.001);
 
     ASSERT_EQ(ns.m_boxes.size(), ns.m_nearbyBoxes.size())
         << "The amount of boxes have to be equal in m_boxes and m_nearbyBoxes";
