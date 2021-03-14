@@ -24,8 +24,8 @@ NeighboursSearch<T>::NeighboursSearch(const Area& area, double radius, double ep
 {
     const Rect rect = m_Area.getBoundingRect();
 
-    m_rectWidth = rect.rightBottom.x - rect.leftTop.x;
-    m_rectHeight = rect.rightBottom.y - rect.leftTop.y;
+    m_rectWidth = rect.getWidth();
+    m_rectHeight = rect.getHeight();
 
     try
     {

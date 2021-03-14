@@ -26,6 +26,10 @@ struct Rect
     Rect(const Point2D& leftTop_, const Point2D& rightBotom_) :
         leftTop(leftTop_),
         rightBottom(rightBotom_) {}
+
+    double getWidth() const { return rightBottom.x - leftTop.x; }
+
+    double getHeight() const { return rightBottom.y - leftTop.y; }
 };
 
 /**
