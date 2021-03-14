@@ -7,6 +7,8 @@
 #include "MarchingCubes.h"
 #include "MarchingCubesConfig.h"
 
+#include <iterator>
+
 namespace SPHAlgorithms
 {
 
